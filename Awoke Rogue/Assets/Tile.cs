@@ -20,7 +20,35 @@ public class Tile : MonoBehaviour
             }
         }
 
-        RoomGenerator room = new RoomGenerator();
-        room.GenerateRoom();
+        DungeonGenerator dungeon = new DungeonGenerator();
+        dungeon.GenerateDungeon();
+    }
+
+    public void AddWall(int tile)
+    {
+        Tile.type[tile] = "Wall";
+        Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/Wall");
+    }
+
+    public void AddTerrain(int tile)
+    {
+        Tile.type[tile] = "Terrain";
+        Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Terrains/Terrain");
+    }
+
+    public void AddStart(int tile)
+    {
+        Tile.type[tile] = "Start";
+        Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Start");
+        PlayerMovement.tilePos = tile;
+        PlayerMovement.xPos = tile % 40;
+        PlayerMovement.yPos = tile / 40;
+        PlayerMovement.Player.transform.position = new Vector3(Tiles[tile].transform.position.x, Tiles[tile].transform.position.y, -0.01f);
+    }
+
+    public void AddExit(int tile)
+    {
+        Tile.type[tile] = "Exit";
+        Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Exit");
     }
 }

@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     public static GameObject[] Tiles = new GameObject[SIZE];
 
     public static string[] type = new string[SIZE];
+    public static bool[] passable = new bool[SIZE];
 
     private void Start()
     {
@@ -19,21 +20,20 @@ public class Tile : MonoBehaviour
                 Tiles[j + (40 * i)] = GameObject.Find("TilesHorizontal (" + i + ")/Tile (" + j + ")");
             }
         }
-
-        DungeonGenerator dungeon = new DungeonGenerator();
-        dungeon.GenerateDungeon();
     }
 
     public void AddWall(int tile)
     {
         Tile.type[tile] = "Wall";
         Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/Wall");
+        Tile.passable[tile] = false;
     }
 
     public void AddTerrain(int tile)
     {
         Tile.type[tile] = "Terrain";
         Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Terrains/Terrain");
+        Tile.passable[tile] = true;
     }
 
     public void AddStart(int tile)
@@ -43,12 +43,13 @@ public class Tile : MonoBehaviour
         PlayerMovement.tilePos = tile;
         PlayerMovement.xPos = tile % 40;
         PlayerMovement.yPos = tile / 40;
-        PlayerMovement.Player.transform.position = new Vector3(Tiles[tile].transform.position.x, Tiles[tile].transform.position.y, -0.01f);
+        Tile.passable[tile] = true;
     }
 
     public void AddExit(int tile)
     {
         Tile.type[tile] = "Exit";
         Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Exit");
+        Tile.passable[tile] = true;
     }
 }

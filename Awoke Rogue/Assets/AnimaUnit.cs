@@ -17,7 +17,7 @@ public class AnimaUnit : MonoBehaviour
             float dist = Mathf.Sqrt(
                 Mathf.Pow(endPoint.transform.position.x - startPoint.transform.position.x, 2) +
                 Mathf.Pow(endPoint.transform.position.y - startPoint.transform.position.y, 2));
-            this.transform.Translate(dir.normalized * dist * (Time.deltaTime) * 10);
+            this.transform.Translate(dir.normalized * dist * (Time.deltaTime) * 5);
             counter -= Time.deltaTime;
         }
 

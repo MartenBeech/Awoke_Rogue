@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public static int xPos;
     public static int yPos;
     public static int tilePos;
-    AnimaUnit animaUnit = new AnimaUnit();
+    public static bool playerTurn = true;
 
     private void Start()
     {
@@ -62,14 +62,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer(int from, int to)
     {
+        playerTurn = false;
+
         tilePos = to;
         PlayerMovement.xPos = tilePos % 40;
         PlayerMovement.yPos = tilePos / 40;
 
         Player.GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
         Player.GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
-        Player.GetComponentInChildren<AnimaUnit>().counter = 0.1f;
+        Player.GetComponentInChildren<AnimaUnit>().counter = 0.19f;
 
-        //PlayerMovement.Player.transform.position = new Vector3(Tile.Tiles[tilePos].transform.position.x, Tile.Tiles[tilePos].transform.position.y, -0.01f);
+        Tile.passable[from] = true;
+        Tile.passable[to] = false;
     }
 }

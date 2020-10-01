@@ -12,7 +12,7 @@ public class DungeonGenerator : MonoBehaviour
         AddRoomSection(30);
 
         AddStartAndExit();
-
+        AddEnemies();
     }
 
     private void FillWithWalls()
@@ -145,14 +145,14 @@ public class DungeonGenerator : MonoBehaviour
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Terrain");
+        while (Tile.type[rnd] != "Terrain" || !Tile.passable[rnd]);
         tile.AddStart(rnd);
 
         do
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Terrain");
+        while (Tile.type[rnd] != "Terrain" || !Tile.passable[rnd]);
         tile.AddExit(rnd);
     }
 
@@ -163,5 +163,15 @@ public class DungeonGenerator : MonoBehaviour
         if (tile > 39)
             tile = 39;
         return tile;
+    }
+
+    private void AddEnemies()
+    {
+        Enemy enemy = new Enemy();
+
+        for (int i = 0; i < 20; i++)
+        {
+            enemy.SummonRandomEnemy("Dire Wolf");
+        }
     }
 }

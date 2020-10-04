@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (tilePos - 40 >= 0)
             {
-                if (Tile.type[tilePos - 40] != "Wall")
+                if (Tile.passable[tilePos - 40])
                 {
                     MovePlayer(tilePos, tilePos - 40);
                 }
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (tilePos + 40 < 1600)
             {
-                if (Tile.type[tilePos + 40] != "Wall")
+                if (Tile.passable[tilePos + 40])
                 {
                     MovePlayer(tilePos, tilePos + 40);
                 }
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (tilePos % 40 != 0)
             {
-                if (Tile.type[tilePos -1] != "Wall")
+                if (Tile.passable[tilePos - 1])
                 {
                     MovePlayer(tilePos, tilePos - 1);
                 }
@@ -52,7 +52,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (tilePos % 40 != 39)
             {
-                if (Tile.type[tilePos + 1] != "Wall")
+                if (Tile.passable[tilePos + 1])
                 {
                     MovePlayer(tilePos, tilePos + 1);
                 }

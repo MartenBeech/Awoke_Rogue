@@ -9,10 +9,10 @@ public class DungeonGenerator : MonoBehaviour
     public void GenerateDungeon()
     {
         FillWithWalls();
-        AddRoomSection(30);
+        AddRoomSection(2, 1);
 
         AddStartAndExit();
-        AddEnemies();
+        AddEnemies(0);
     }
 
     private void FillWithWalls()
@@ -24,17 +24,68 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void AddRoomSection(int roomAmount)
+    private void AddRoomSection(int roomAmount, int treasureRoom)
     {
         int[] centerX = new int[roomAmount];
         int[] centerY = new int[roomAmount];
-        int xs, xe, ys, ye;
+        int xs, xe, ys, ye, XS, XE, YS, YE;
 
-        for (int i = 0; i < roomAmount; i++)
+        for (int i = treasureRoom; i < roomAmount; i++)
         {
             int xCenter = rng.Range(0, 39);
             int yCenter = rng.Range(0, 39);
-            AddRoom(xs = rng.Range(xCenter - 5, xCenter - 1), xe = rng.Range(xCenter, xCenter + 4), ys = rng.Range(yCenter - 5, yCenter - 1), ye = rng.Range(yCenter, yCenter + 4));
+            XS = xs = rng.Range(xCenter - 5, xCenter - 1);
+            XE = xe = rng.Range(xCenter, xCenter + 4);
+            YS = ys = rng.Range(yCenter - 5, yCenter - 1);
+            YE = ye = rng.Range(yCenter, yCenter + 4);
+
+            xs += SetIntervalOffset(XS);
+            xe += SetIntervalOffset(XS);
+            xs -= SetIntervalOffset(XE);
+            xe -= SetIntervalOffset(XE);
+
+            ys += SetIntervalOffset(YS);
+            ye += SetIntervalOffset(YS);
+            ys -= SetIntervalOffset(YE);
+            ye -= SetIntervalOffset(YE);
+
+            AddRoom(xs, xe, ys, ye);
+            centerX[i] = Mathf.RoundToInt(xs + ((xe - xs) / 2));
+            centerY[i] = Mathf.RoundToInt(ys + ((ye - ys) / 2));
+        }
+
+        for (int i = 0; i < treasureRoom; i++)
+        {
+            int xCenter = rng.Range(0, 40);
+            int yCenter = rng.Range(0, 40);
+
+            int roomType = rng.Range(0, 2);
+            if (roomType == 0)
+            {
+                XS = xs = xCenter - 6;
+                XE = xe = xCenter + 5;
+                YS = ys = yCenter - 4;
+                YE = ye = yCenter + 3;
+            }
+            else
+            {
+                XS = xs = xCenter - 4;
+                XE = xe = xCenter + 3;
+                YS = ys = yCenter - 6;
+                YE = ye = yCenter + 5;
+            }
+
+            xs += SetIntervalOffset(XS);
+            xe += SetIntervalOffset(XS);
+            xs -= SetIntervalOffset(XE);
+            xe -= SetIntervalOffset(XE);
+
+            ys += SetIntervalOffset(YS);
+            ye += SetIntervalOffset(YS);
+            ys -= SetIntervalOffset(YE);
+            ye -= SetIntervalOffset(YE);
+
+            AddRoom(xs, xe, ys, ye, true, roomType);
             centerX[i] = Mathf.RoundToInt(xs + ((xe - xs) / 2));
             centerY[i] = Mathf.RoundToInt(ys + ((ye - ys) / 2));
         }
@@ -49,11 +100,10 @@ public class DungeonGenerator : MonoBehaviour
             {
                 AddPath(centerX[i], centerX[i + 1], centerY[i], centerY[i + 1]);
             }
-            
         }
     }
 
-    private void AddRoom(int xStart, int xEnd, int yStart, int yEnd)
+    private void AddRoom(int xStart, int xEnd, int yStart, int yEnd, bool treasureRoom = false, int roomType = 0)
     {
         Tile tile = new Tile();
         if (xEnd < xStart)
@@ -68,16 +118,40 @@ public class DungeonGenerator : MonoBehaviour
             yEnd = yStart;
             yStart = temp;
         }
-        xStart = SetTileInsideInterval(xStart);
-        xEnd = SetTileInsideInterval(xEnd);
-        yStart = SetTileInsideInterval(yStart);
-        yEnd = SetTileInsideInterval(yEnd);
 
         for (int y = yStart; y <= yEnd; y++)
         {
             for (int x = xStart; x <= xEnd; x++)
             {
-                tile.AddTerrain(x + (40 * y));
+                tile.AddFloor(x + (40 * y));
+            }
+        }
+
+        if (treasureRoom)
+        {
+            for (int y = yStart; y <= yEnd; y++)
+            {
+                for (int x = xStart; x <= xEnd; x++)
+                {
+                    if (y != yStart && y != yEnd && x != xStart && x != xEnd)
+                    {
+                        if (y == yStart + 1 || y == yEnd - 1 || x == xStart + 1 || x == xEnd - 1)
+                        {
+                            tile.AddWall(x + (40 * y), "Treasure");
+                        }
+                        else
+                        {
+                            if (roomType == 0)
+                            {
+                                tile.AddFloor(x + (40 * y), (x - xStart - 2) + ((y - yStart - 2) * 8), "Treasure");
+                            }
+                            else if (roomType == 1)
+                            {
+                                tile.AddFloor(x + (40 * y), (x - xStart - 2) + ((y - yStart - 2) * 4), "Treasure");
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -85,10 +159,6 @@ public class DungeonGenerator : MonoBehaviour
     private void AddPath(int xStart, int xEnd, int yStart, int yEnd)
     {
         Tile tile = new Tile();
-        xStart = SetTileInsideInterval(xStart);
-        xEnd = SetTileInsideInterval(xEnd);
-        yStart = SetTileInsideInterval(yStart);
-        yEnd = SetTileInsideInterval(yEnd);
 
         List<char> movement = new List<char>();
         for (int i = yStart; i < yEnd; i++)
@@ -111,7 +181,6 @@ public class DungeonGenerator : MonoBehaviour
         int movementCount = movement.Count;
         int xpos = xStart;
         int ypos = yStart;
-        tile.AddTerrain(xpos + (40 * ypos));
         for (int i = 0; i < movementCount; i++)
         {
             int rnd = rng.Range(0, movement.Count);
@@ -131,7 +200,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 xpos--;
             }
-            tile.AddTerrain(xpos + (40 * ypos));
+
+            if (!Tile.type[xpos + (40 * ypos)].Contains("Treasure"))
+            {
+                tile.AddFloor(xpos + (40 * ypos));
+            }
             movement.RemoveAt(rnd);
         }
     }
@@ -145,33 +218,33 @@ public class DungeonGenerator : MonoBehaviour
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Terrain" || !Tile.passable[rnd]);
+        while (Tile.type[rnd] != "Floor" || !Tile.passable[rnd]);
         tile.AddStart(rnd);
 
         do
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Terrain" || !Tile.passable[rnd]);
+        while (Tile.type[rnd] != "Floor" || !Tile.passable[rnd]);
         tile.AddExit(rnd);
     }
 
-    private int SetTileInsideInterval(int tile)
+    private int SetIntervalOffset(int tile)
     {
         if (tile < 0)
-            tile = 0;
+            return -tile;
         if (tile > 39)
-            tile = 39;
-        return tile;
+            return tile - 39;
+        return 0;
     }
 
-    private void AddEnemies()
+    private void AddEnemies(int amount)
     {
         Enemy enemy = new Enemy();
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < amount; i++)
         {
-            enemy.SummonRandomEnemy("Dire Wolf");
+            enemy.SummonRandomEnemy(0);
         }
     }
 }

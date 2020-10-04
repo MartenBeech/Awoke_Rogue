@@ -21,15 +21,31 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void SummonRandomEnemy(string title)
+    public void SummonRandomEnemy(int difficulty)
     {
         int rnd;
         do
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Terrain" || !Tile.passable[rnd]);
-        SummonEnemy(rnd, title);
+        while (Tile.type[rnd] != "Floor" || !Tile.passable[rnd]);
+
+        List<string> enemies = new List<string>();
+
+        if (difficulty == 0)
+        {
+            enemies.Add("Dire Wolf");
+        }
+        else if (difficulty == 1)
+        {
+            enemies.Add("Dire Wolf");
+        }
+        else if (difficulty == 2)
+        {
+            enemies.Add("Dire Wolf");
+        }
+        SummonEnemy(rnd, enemies[rng.Range(0, enemies.Count)]);
+
     }
 
     public void SummonEnemy(int tile, string title)

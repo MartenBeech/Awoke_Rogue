@@ -5,17 +5,19 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    private GameObject cam;
-    private GameObject board;
+    private GameObject Cam;
+    private GameObject Board;
+    public static GameObject Info;
 
     private void Start()
     {
-        cam = GameObject.Find("Main Camera");
-        board = GameObject.Find("CanvasDungeon");
+        Cam = GameObject.Find("Main Camera");
+        Board = GameObject.Find("CanvasDungeon");
+        Info = GameObject.Find("StartGame");
     }
     public void StartGameClicked()
     {
-        cam.transform.position = new Vector3(board.transform.position.x, board.transform.position.y, -10);
+        Cam.transform.position = new Vector3(Board.transform.position.x, Board.transform.position.y, -10);
         DungeonGenerator dungeon = new DungeonGenerator();
         dungeon.GenerateDungeon();
 

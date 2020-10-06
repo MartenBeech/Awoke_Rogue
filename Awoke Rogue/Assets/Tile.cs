@@ -23,51 +23,73 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void AddWall(int tile, string type = "Dungeon")
+    public void AddWall(int tile, string _type = "Dungeon")
     {
-        if (type == "Dungeon")
+        if (_type == "Dungeon")
         {
-            Tile.type[tile] = "Wall";
-            Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/WallDungeon");
+            type[tile] = "Wall";
+            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/WallDungeon");
         }
-        else if (type == "Treasure")
+        else if (_type == "Treasure")
         {
-            Tile.type[tile] = "Treasure Wall";
-            Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/WallTreasure");
+            type[tile] = "Treasure Wall";
+            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/WallTreasure");
         }
-        Tile.passable[tile] = false;
+        passable[tile] = false;
     }
 
-    public void AddFloor(int tile, int i = 0, string type = "Dungeon")
+    public void AddFloor(int tile, int i = 0, string _type = "Dungeon")
     {
-        if (type == "Dungeon")
+        if (_type == "Dungeon")
         {
-            Tile.type[tile] = "Floor";
-            Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Floors/FloorDungeon");
+            type[tile] = "Floor";
+            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Floors/FloorDungeon");
         }
-        else if (type == "Treasure")
+        else if (_type == "Treasure")
         {
-            Tile.type[tile] = "Treasure Floor";
-            Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Floors/FloorTreasure (" + i + ")");
+            type[tile] = "Treasure Floor";
+            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Floors/FloorTreasure (" + i + ")");
         }
-        Tile.passable[tile] = true;
+        passable[tile] = true;
     }
 
     public void AddStart(int tile)
     {
-        Tile.type[tile] = "Start";
-        Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Start");
+        type[tile] = "Start";
+        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Start");
         PlayerMovement.tilePos = tile;
         PlayerMovement.xPos = tile % 40;
         PlayerMovement.yPos = tile / 40;
-        Tile.passable[tile] = true;
+        passable[tile] = true;
     }
 
     public void AddExit(int tile)
     {
-        Tile.type[tile] = "Exit";
-        Tile.Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Exit");
-        Tile.passable[tile] = true;
+        type[tile] = "Exit";
+        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Exit");
+        passable[tile] = true;
+    }
+
+    public void AddGateClosed(int tile)
+    {
+        Rng rng = new Rng();
+        type[tile] = "GateClosed";
+        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Objects/Gate" + rng.Range(0, 3));
+        passable[tile] = false;
+    }
+
+    public void AddGateOpen(int tile)
+    {
+        type[tile] = "GateOpen";
+        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Objects/GateOpen");
+        passable[tile] = true;
+    }
+
+    public void RotateTile(GameObject gameObject, float angle)
+    {
+        angle = (angle * 2 * Mathf.PI / 360);
+        gameObject.transform.rotation = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y, Mathf.Sin(angle / 2), Mathf.Cos(angle / 2));
+        gameObject.GetComponentInChildren<Text>().transform.rotation = new Quaternion(gameObject.GetComponentInChildren<Text>().transform.rotation.x, gameObject.GetComponentInChildren<Text>().transform.rotation.y, 0, 1);
     }
 
     public void TileClicked()

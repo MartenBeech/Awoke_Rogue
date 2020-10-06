@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 677, y: 492}
+  m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 21758
+  controlID: 15470
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,10 +135,10 @@ MonoBehaviour:
     y: 0
     width: 1368
     height: 947
-  m_MinSize: {x: 402, y: 492}
+  m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 21759
+  controlID: 15471
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,10 +160,10 @@ MonoBehaviour:
     y: 0
     width: 1368
     height: 676
-  m_MinSize: {x: 402, y: 221}
-  m_MaxSize: {x: 8002, y: 4021}
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 21760
+  controlID: 15472
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,8 +183,8 @@ MonoBehaviour:
     y: 0
     width: 392
     height: 676
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -217,10 +217,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 790}
+      scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5cfbffff903c000058440000964500002c48000000510000fc520000ec540000ae5500006a570000b8570000ac5c0000125e000062650000746600003e6d0000646e00007c6e0000e46e00003c740000ce77000034790000267b0000a07c00003e7e0000ea7f0000ca800000d8800000bc820000fc8200008283000076840000a8880000c889000060900000dc90000030910000309600007c9800005e9b0000169c0000929f0000d2a7000062a8000002aa000008ac000098ac000040ae00005caf0000c0af00008cb20000f4b20000b4b50000b8b7000004ba000086bc0000
+      m_ExpandedIDs: 5cfbfffffc520000147a0000ba89000030910000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -308,9 +308,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.2693753, y: -0.20993535, z: -16.227238}
+    m_Target: {x: -18.14344, y: 0.35193163, z: -20.228117}
     speed: 2
-    m_Value: {x: 2.2693753, y: -0.20993535, z: -16.227238}
+    m_Value: {x: -18.14344, y: 0.35193163, z: -20.228117}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -361,9 +361,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 21.822191
+    m_Target: 2.953376
     speed: 2
-    m_Value: 21.822191
+    m_Value: 2.953376
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -432,8 +432,8 @@ MonoBehaviour:
     y: 676
     width: 1368
     height: 271
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -478,12 +478,12 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Floors
+    - Assets/Resources/Objects
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Floors
+  - Assets/Resources/Objects
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\morte\Desktop\Background Stuff\Unity\Awoke_Rogue\Awoke
     Rogue
@@ -491,8 +491,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e6be0000
-    m_LastClickedID: 48870
+    m_SelectedIDs: debe0000
+    m_LastClickedID: 48862
     m_ExpandedIDs: 00000000d2be0000dabe000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -546,9 +546,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 76840000
-    m_LastClickedInstanceID: 33910
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000623500005a3400007e37000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -659,7 +659,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 33910
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_AssetGUID: 
   m_InstanceID: 0

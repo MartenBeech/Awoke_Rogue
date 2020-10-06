@@ -21,6 +21,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             Tile tile = new Tile();
             tile.AddWall(i);
+            tile.RotateTile(Tile.Tiles[i], 0);
         }
     }
 
@@ -129,6 +130,7 @@ public class DungeonGenerator : MonoBehaviour
 
         if (treasureRoom)
         {
+            List<int> gatePlacements = new List<int>();
             for (int y = yStart; y <= yEnd; y++)
             {
                 for (int x = xStart; x <= xEnd; x++)
@@ -138,12 +140,14 @@ public class DungeonGenerator : MonoBehaviour
                         if (y == yStart + 1 || y == yEnd - 1 || x == xStart + 1 || x == xEnd - 1)
                         {
                             tile.AddWall(x + (40 * y), "Treasure");
+                            gatePlacements.Add(x + (40 * y));
                         }
                         else
                         {
                             if (roomType == 0)
                             {
-                                tile.AddFloor(x + (40 * y), (x - xStart - 2) + ((y - yStart - 2) * 8), "Treasure");
+                                tile.AddFloor(x + (40 * y), ((x - xStart - 2) * 4) + ((y - yStart - 2)) + (3 - ((y - yStart - 2) * 2)), "Treasure");
+                                tile.RotateTile(Tile.Tiles[(x + (40 * y))], 90);
                             }
                             else if (roomType == 1)
                             {
@@ -153,6 +157,11 @@ public class DungeonGenerator : MonoBehaviour
                     }
                 }
             }
+            gatePlacements.Remove((xStart + 1) + (40 * (yStart + 1)));
+            gatePlacements.Remove((xEnd - 1) + (40 * (yStart + 1)));
+            gatePlacements.Remove((xStart + 1) + (40 * (yEnd - 1)));
+            gatePlacements.Remove((xEnd - 1) + (40 * (yEnd - 1)));
+            tile.AddGateClosed(gatePlacements[rng.Range(0, gatePlacements.Count)]);
         }
     }
 

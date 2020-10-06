@@ -19,12 +19,19 @@ public class AnimaUnit : MonoBehaviour
                 Mathf.Pow(endPoint.transform.position.y - startPoint.transform.position.y, 2));
             this.transform.Translate(dir.normalized * dist * (Time.deltaTime) * 5);
             counter -= Time.deltaTime;
-        }
 
-        else if (counter <= 0)
-        {
-            this.transform.position = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y, -0.01f);
+            if (counter <= 0)
+            {
+                this.transform.position = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y, -0.01f);
+            }
         }
+    }
+
+    public void MoveUnit(GameObject gameObject, int from, int to)
+    {
+        gameObject.GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
+        gameObject.GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
+        gameObject.GetComponentInChildren<AnimaUnit>().counter = 0.19f;
     }
 }
 

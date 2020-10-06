@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Enemy.cs" />
+    <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\DungeonGenerator.cs" />
     <Compile Include="Assets\Rng.cs" />
     <Compile Include="Assets\CameraFollow.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Assets\Tile.cs" />
     <Compile Include="Assets\AnimaUnit.cs" />
     <Compile Include="Assets\AnimaText.cs" />
-    <Compile Include="Assets\Menu.cs" />
+    <Compile Include="Assets\FogOfWar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

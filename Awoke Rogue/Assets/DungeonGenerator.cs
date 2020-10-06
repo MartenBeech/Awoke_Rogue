@@ -12,7 +12,7 @@ public class DungeonGenerator : MonoBehaviour
         AddRoomSection(2, 1);
 
         AddStartAndExit();
-        AddEnemies(0);
+        AddEnemies(5);
     }
 
     private void FillWithWalls()
@@ -139,19 +139,19 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         if (y == yStart + 1 || y == yEnd - 1 || x == xStart + 1 || x == xEnd - 1)
                         {
-                            tile.AddWall(x + (40 * y), "Treasure");
+                            tile.AddWall(x + (40 * y), Tile.Type.Treasure);
                             gatePlacements.Add(x + (40 * y));
                         }
                         else
                         {
                             if (roomType == 0)
                             {
-                                tile.AddFloor(x + (40 * y), ((x - xStart - 2) * 4) + ((y - yStart - 2)) + (3 - ((y - yStart - 2) * 2)), "Treasure");
+                                tile.AddFloor(x + (40 * y), ((x - xStart - 2) * 4) + ((y - yStart - 2)) + (3 - ((y - yStart - 2) * 2)), Tile.Type.Treasure);
                                 tile.RotateTile(Tile.Tiles[(x + (40 * y))], 90);
                             }
                             else if (roomType == 1)
                             {
-                                tile.AddFloor(x + (40 * y), (x - xStart - 2) + ((y - yStart - 2) * 4), "Treasure");
+                                tile.AddFloor(x + (40 * y), (x - xStart - 2) + ((y - yStart - 2) * 4), Tile.Type.Treasure);
                             }
                         }
                     }
@@ -210,7 +210,7 @@ public class DungeonGenerator : MonoBehaviour
                 xpos--;
             }
 
-            if (!Tile.type[xpos + (40 * ypos)].Contains("Treasure"))
+            if (!Tile.type[xpos + (40 * ypos)].ToString().Contains("Treasure"))
             {
                 tile.AddFloor(xpos + (40 * ypos));
             }
@@ -227,14 +227,14 @@ public class DungeonGenerator : MonoBehaviour
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Floor" || !Tile.passable[rnd]);
+        while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
         tile.AddStart(rnd);
 
         do
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Floor" || !Tile.passable[rnd]);
+        while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
         tile.AddExit(rnd);
     }
 
@@ -253,7 +253,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            enemy.SummonRandomEnemy(0);
+            enemy.SummonRandomEnemy(1);
         }
     }
 }

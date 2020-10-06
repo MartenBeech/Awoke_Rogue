@@ -5,21 +5,11 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    const int SIZE = 50;
+    const int SIZE = Tile.SIZE;
     Rng rng = new Rng();
     public static bool enemyTurn = false;
-    public static GameObject[] Enemies = new GameObject[SIZE];
     public static EnemyUnit[] enemies = new EnemyUnit[SIZE];
     public static bool[] occupied = new bool[SIZE];
-
-    private void Start()
-    {
-        for (int i = 0; i < Enemies.Length; i++)
-        {
-            Enemies[i] = GameObject.Find("Enemy (" + i + ")");
-            enemies[i] = new EnemyUnit();
-        }
-    }
 
     public void SummonRandomEnemy(int difficulty)
     {
@@ -28,7 +18,7 @@ public class Enemy : MonoBehaviour
         {
             rnd = rng.Range(0, 1600);
         }
-        while (Tile.type[rnd] != "Floor" || !Tile.passable[rnd]);
+        while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
 
         List<string> enemies = new List<string>();
 
@@ -50,36 +40,37 @@ public class Enemy : MonoBehaviour
 
     public void SummonEnemy(int tile, string title)
     {
-        int i = GetUnoccupied();
-        if (i < SIZE)
-        {
-            Enemies[i].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Enemies/" + title);
-            MoveEnemy(i, tile, tile);
-            occupied[i] = true;
-        }
+        GameObject prefab = Resources.Load<GameObject>("Assets/Enemy");
+        GameObject parent = GameObject.Find("Enemies");
+        prefab = Instantiate(prefab, Tile.Tiles[tile].transform.position, Tile.Tiles[tile].transform.rotation, parent.transform);
+        AnimaUnit animaUnit = new AnimaUnit();
+        animaUnit.MoveUnit(prefab, tile, tile);
+
+        prefab.name = "Enemy (" + tile.ToString() + ")";
+
+        enemies[tile] = new EnemyUnit();
+        occupied[tile] = true;
+        prefab.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Enemies/" + title);
+        MoveEnemy(tile, tile);
     }
 
-    public void MoveEnemy(int i, int from, int to)
+    public void MoveEnemy(int from, int to)
     {
-        enemies[i].tilePos = to;
-        enemies[i].xPos = to % 40;
-        enemies[i].yPos = to / 40;
+        enemies[to].tilePos = to;
+        enemies[to].xPos = to % 40;
+        enemies[to].yPos = to / 40;
+        enemies[from] = null;
 
-        Enemies[i].GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
-        Enemies[i].GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
-        Enemies[i].GetComponentInChildren<AnimaUnit>().counter = 0.19f;
+        GameObject.Find("Enemy (" + from.ToString() + ")").name = "Enemy (" + to.ToString() + ")";
 
         Tile.passable[from] = true;
         Tile.passable[to] = false;
+        occupied[from] = false;
+        occupied[to] = true;
     }
 
-    public int GetUnoccupied()
+    public void Destroy(int tile)
     {
-        for (int i = 0; i < SIZE; i++)
-        {
-            if (!occupied[i])
-                return i;
-        }
-        return 20;
+        GameObject.Destroy(GameObject.Find("Enemy (" + tile.ToString() + ")"));
     }
 }

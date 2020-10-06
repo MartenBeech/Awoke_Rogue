@@ -65,8 +65,10 @@ public class PlayerMovement : MonoBehaviour
         playerTurn = false;
 
         tilePos = to;
-        PlayerMovement.xPos = tilePos % 40;
-        PlayerMovement.yPos = tilePos / 40;
+        xPos = tilePos % 40;
+        yPos = tilePos / 40;
+
+        Player.name = "Player (" + to.ToString() + ")";
 
         Player.GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
         Player.GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
@@ -74,5 +76,8 @@ public class PlayerMovement : MonoBehaviour
 
         Tile.passable[from] = true;
         Tile.passable[to] = false;
+
+        FogOfWar fow = new FogOfWar();
+        fow.ScoutPath(to, 5, false);
     }
 }

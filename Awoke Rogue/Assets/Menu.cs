@@ -17,6 +17,15 @@ public class Menu : MonoBehaviour
     }
     public void StartGameClicked()
     {
+        Enemy enemy = new Enemy();
+        for (int i = 0; i < Tile.SIZE; i++)
+        {
+            if (Enemy.occupied[i])
+            {
+                enemy.Destroy(i);
+            }
+        }
+
         Cam.transform.position = new Vector3(Board.transform.position.x, Board.transform.position.y, -10);
         DungeonGenerator dungeon = new DungeonGenerator();
         dungeon.GenerateDungeon();

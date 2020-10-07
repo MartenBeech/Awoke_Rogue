@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public static int xPos;
     public static int yPos;
     public static int tilePos;
-    public static bool playerTurn = true;
 
     private void Start()
     {
@@ -18,43 +17,46 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown("w"))
+        if (Turn.currentTurn == Turn.CurrentTurn.Player)
         {
-            if (tilePos - 40 >= 0)
+            if (Input.GetKeyDown("w"))
             {
-                if (Tile.passable[tilePos - 40])
+                if (tilePos - 40 >= 0)
                 {
-                    MovePlayer(tilePos, tilePos - 40);
+                    if (Tile.passable[tilePos - 40])
+                    {
+                        MovePlayer(tilePos, tilePos - 40);
+                    }
                 }
             }
-        }
-        else if (Input.GetKeyDown("s"))
-        {
-            if (tilePos + 40 < 1600)
+            else if (Input.GetKeyDown("s"))
             {
-                if (Tile.passable[tilePos + 40])
+                if (tilePos + 40 < 1600)
                 {
-                    MovePlayer(tilePos, tilePos + 40);
+                    if (Tile.passable[tilePos + 40])
+                    {
+                        MovePlayer(tilePos, tilePos + 40);
+                    }
                 }
             }
-        }
-        else if (Input.GetKeyDown("a"))
-        {
-            if (tilePos % 40 != 0)
+            else if (Input.GetKeyDown("a"))
             {
-                if (Tile.passable[tilePos - 1])
+                if (tilePos % 40 != 0)
                 {
-                    MovePlayer(tilePos, tilePos - 1);
+                    if (Tile.passable[tilePos - 1])
+                    {
+                        MovePlayer(tilePos, tilePos - 1);
+                    }
                 }
             }
-        }
-        else if (Input.GetKeyDown("d"))
-        {
-            if (tilePos % 40 != 39)
+            else if (Input.GetKeyDown("d"))
             {
-                if (Tile.passable[tilePos + 1])
+                if (tilePos % 40 != 39)
                 {
-                    MovePlayer(tilePos, tilePos + 1);
+                    if (Tile.passable[tilePos + 1])
+                    {
+                        MovePlayer(tilePos, tilePos + 1);
+                    }
                 }
             }
         }
@@ -62,22 +64,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer(int from, int to)
     {
-        playerTurn = false;
-
         tilePos = to;
         xPos = tilePos % 40;
         yPos = tilePos / 40;
 
-        Player.name = "Player (" + to.ToString() + ")";
+        Player.name = "Player" + to.ToString();
 
-        Player.GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
-        Player.GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
-        Player.GetComponentInChildren<AnimaUnit>().counter = 0.19f;
+        AnimaUnit animaUnit = new AnimaUnit();
+        animaUnit.MoveUnit(Player, from, to);
 
         Tile.passable[from] = true;
         Tile.passable[to] = false;
 
-        FogOfWar fow = new FogOfWar();
-        fow.ScoutPath(to, 5, false);
+        Turn.currentTurn = Turn.CurrentTurn.PlayerNeutral;
     }
 }

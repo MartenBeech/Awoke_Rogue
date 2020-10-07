@@ -9,10 +9,10 @@ public class DungeonGenerator : MonoBehaviour
     public void GenerateDungeon()
     {
         FillWithWalls();
-        AddRoomSection(2, 1);
+        AddRoomSection(20, 1);
 
         AddStartAndExit();
-        AddEnemies(5);
+        AddEnemies(30);
     }
 
     private void FillWithWalls()
@@ -253,7 +253,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            enemy.SummonRandomEnemy(1);
+            enemy.SummonRandomEnemy(Enemy.Difficulty.Easy);
         }
     }
 }

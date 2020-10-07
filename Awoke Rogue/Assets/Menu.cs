@@ -25,12 +25,17 @@ public class Menu : MonoBehaviour
                 enemy.Destroy(i);
             }
         }
-
         Cam.transform.position = new Vector3(Board.transform.position.x, Board.transform.position.y, -10);
         DungeonGenerator dungeon = new DungeonGenerator();
         dungeon.GenerateDungeon();
 
         PlayerMovement playerMovement = new PlayerMovement();
         playerMovement.MovePlayer(PlayerMovement.tilePos, PlayerMovement.tilePos);
+
+        FogOfWar fow = new FogOfWar();
+        fow.ScoutPath(PlayerMovement.tilePos, Ability.scoutRange, false);
+
+        Turn turn = new Turn();
+        turn.PlayerTurn();
     }
 }

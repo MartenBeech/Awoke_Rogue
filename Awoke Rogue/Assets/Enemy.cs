@@ -11,7 +11,12 @@ public class Enemy : MonoBehaviour
     public static EnemyUnit[] enemies = new EnemyUnit[SIZE];
     public static bool[] occupied = new bool[SIZE];
 
-    public void SummonRandomEnemy(int difficulty)
+    public enum Difficulty
+    {
+        Easy, Normal, Hard
+    };
+
+    public void SummonRandomEnemy(Difficulty difficulty)
     {
         int rnd;
         do
@@ -22,20 +27,19 @@ public class Enemy : MonoBehaviour
 
         List<string> enemies = new List<string>();
 
-        if (difficulty == 0)
+        if (difficulty == Difficulty.Easy)
         {
             enemies.Add("Dire Wolf");
         }
-        else if (difficulty == 1)
+        else if (difficulty == Difficulty.Normal)
         {
             enemies.Add("Dire Wolf");
         }
-        else if (difficulty == 2)
+        else if (difficulty == Difficulty.Hard)
         {
             enemies.Add("Dire Wolf");
         }
         SummonEnemy(rnd, enemies[rng.Range(0, enemies.Count)]);
-
     }
 
     public void SummonEnemy(int tile, string title)
@@ -43,34 +47,39 @@ public class Enemy : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>("Assets/Enemy");
         GameObject parent = GameObject.Find("Enemies");
         prefab = Instantiate(prefab, Tile.Tiles[tile].transform.position, Tile.Tiles[tile].transform.rotation, parent.transform);
-        AnimaUnit animaUnit = new AnimaUnit();
-        animaUnit.MoveUnit(prefab, tile, tile);
-
-        prefab.name = "Enemy (" + tile.ToString() + ")";
+        
+        prefab.name = "Enemy" + tile.ToString();
 
         enemies[tile] = new EnemyUnit();
         occupied[tile] = true;
         prefab.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Enemies/" + title);
-        MoveEnemy(tile, tile);
+        MoveEnemy(prefab, tile, tile);
     }
 
-    public void MoveEnemy(int from, int to)
+    public void MoveEnemy(GameObject prefab, int from, int to)
     {
+        enemies[to] = new EnemyUnit();
+
         enemies[to].tilePos = to;
         enemies[to].xPos = to % 40;
         enemies[to].yPos = to / 40;
-        enemies[from] = null;
+           
+        GameObject.Find("Enemy" + from.ToString()).name = "Enemy" + to.ToString();
 
-        GameObject.Find("Enemy (" + from.ToString() + ")").name = "Enemy (" + to.ToString() + ")";
-
+        occupied[from] = false;
         Tile.passable[from] = true;
         Tile.passable[to] = false;
-        occupied[from] = false;
         occupied[to] = true;
+
+        AnimaUnit animaUnit = new AnimaUnit();
+        animaUnit.MoveUnit(prefab, from, to);
     }
 
     public void Destroy(int tile)
     {
-        GameObject.Destroy(GameObject.Find("Enemy (" + tile.ToString() + ")"));
+        GameObject.Destroy(GameObject.Find("Enemy" + tile.ToString()));
+        enemies[tile] = null;
+        occupied[tile] = false;
+        Tile.passable[tile] = true;
     }
 }

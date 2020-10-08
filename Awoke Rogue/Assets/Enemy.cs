@@ -11,65 +11,84 @@ public class Enemy : MonoBehaviour
     public static EnemyUnit[] enemies = new EnemyUnit[SIZE];
     public static bool[] occupied = new bool[SIZE];
 
-    public enum Difficulty
+    public void SummonEnemies(int amount)
     {
-        Easy, Normal, Hard
-    };
+        List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
+        enemyList.Add(UnitStat.Units.DireWolf);
 
-    public void SummonRandomEnemy(Difficulty difficulty)
-    {
-        int rnd;
-        do
+        for (int i = 0; i < amount; i++)
         {
-            rnd = rng.Range(0, 1600);
-        }
-        while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
+            int rnd;
+            do
+            {
+                rnd = rng.Range(0, 1600);
+            }
+            while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
 
-        List<string> enemies = new List<string>();
-
-        if (difficulty == Difficulty.Easy)
-        {
-            enemies.Add("Dire Wolf");
+            SummonEnemy(rnd, enemyList[rng.Range(0, enemyList.Count)]);
         }
-        else if (difficulty == Difficulty.Normal)
-        {
-            enemies.Add("Dire Wolf");
-        }
-        else if (difficulty == Difficulty.Hard)
-        {
-            enemies.Add("Dire Wolf");
-        }
-        SummonEnemy(rnd, enemies[rng.Range(0, enemies.Count)]);
     }
 
-    public void SummonEnemy(int tile, string title)
+    public void SummonTreasureEnemies(int amount)
     {
+
+    }
+
+    public void SummonBoss()
+    {
+
+    }
+
+    public void SummonEnemy(int tile, UnitStat.Units unit)
+    {
+        enemies[tile] = new EnemyUnit();
+        enemies[tile].tilePos = tile;
+        enemies[tile].xPos = tile % 40;
+        enemies[tile].yPos = tile / 40;
+
+        UnitStat unitStat = new UnitStat();
+        unitStat.SetStats(tile, unit);
+
         GameObject prefab = Resources.Load<GameObject>("Assets/Enemy");
         GameObject parent = GameObject.Find("Enemies");
         prefab = Instantiate(prefab, Tile.Tiles[tile].transform.position, Tile.Tiles[tile].transform.rotation, parent.transform);
         
         prefab.name = "Enemy" + tile.ToString();
 
-        enemies[tile] = new EnemyUnit();
         occupied[tile] = true;
-        prefab.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Enemies/" + title);
+        unitStat.DisplayStats(tile);
+        prefab.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Enemies/" + enemies[tile].title);
         MoveEnemy(prefab, tile, tile);
     }
 
     public void MoveEnemy(GameObject prefab, int from, int to)
     {
-        enemies[to] = new EnemyUnit();
+        if (to != from)
+        {
+            enemies[to] = new EnemyUnit();
 
-        enemies[to].tilePos = to;
-        enemies[to].xPos = to % 40;
-        enemies[to].yPos = to / 40;
-           
-        GameObject.Find("Enemy" + from.ToString()).name = "Enemy" + to.ToString();
+            enemies[to].tilePos = to;
+            enemies[to].xPos = to % 40;
+            enemies[to].yPos = to / 40;
 
-        occupied[from] = false;
-        Tile.passable[from] = true;
-        Tile.passable[to] = false;
-        occupied[to] = true;
+            enemies[to].title = enemies[from].title;
+            enemies[to].health = enemies[from].health;
+            enemies[to].range = enemies[from].range;
+            enemies[to].damage = enemies[from].damage;
+            enemies[to].cooldown = enemies[from].cooldown;
+
+            enemies[to].preparing = enemies[from].preparing;
+            enemies[to].cantAttack = enemies[from].cantAttack;
+            enemies[to].cantMove = enemies[from].cantMove;
+
+            GameObject.Find("Enemy" + from.ToString()).name = "Enemy" + to.ToString();
+
+            occupied[from] = false;
+            Tile.passable[from] = true;
+            Tile.passable[to] = false;
+            occupied[to] = true;
+            enemies[from] = null;
+        }
 
         AnimaUnit animaUnit = new AnimaUnit();
         animaUnit.MoveUnit(prefab, from, to);

@@ -60,16 +60,17 @@
     <Compile Include="Assets\DungeonGenerator.cs" />
     <Compile Include="Assets\Rng.cs" />
     <Compile Include="Assets\CameraFollow.cs" />
+    <Compile Include="Assets\Object.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\Turn.cs" />
     <Compile Include="Assets\FogOfWar.cs" />
     <Compile Include="Assets\EnemyUnit.cs" />
+    <Compile Include="Assets\Distance.cs" />
     <Compile Include="Assets\Tile.cs" />
     <Compile Include="Assets\AnimaUnit.cs" />
     <Compile Include="Assets\AnimaText.cs" />
-    <Compile Include="Assets\Object.cs" />
-    <Compile Include="Assets\Distance.cs" />
-    <Compile Include="Assets\Turn.cs" />
-    <Compile Include="Assets\Ability.cs" />
+    <Compile Include="Assets\UnitStat.cs" />
+    <Compile Include="Assets\PlayerStat.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

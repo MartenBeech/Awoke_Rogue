@@ -9,7 +9,7 @@ public class AnimaText : MonoBehaviour
     private GameObject startSet;
     public static GameObject parent;
     private static int dealerSet;
-    private float counter = 1.5f;
+    private float counter = 1f;
     private static int bufSize = 0;
     private static GameObject[] bufPrefab = new GameObject[50];
     private static GameObject[] bufPos = new GameObject[50];
@@ -20,16 +20,16 @@ public class AnimaText : MonoBehaviour
 
     private void Awake()
     {
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 20f);
+        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y);
     }
     void Update()
     {
         if (counter > 0)
         {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.18f);
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.005f);
             counter -= Time.deltaTime;
 
-            if (counter <= 1 && !bufDecreased)
+            if (counter <= 0.5 && !bufDecreased)
             {
                 bufDecreased = true;
                 
@@ -61,7 +61,7 @@ public class AnimaText : MonoBehaviour
 
     public void ShowText(int to, string text, Color textColor)
     {
-        prefab = Resources.Load<GameObject>("Assets/DamageText");
+        prefab = Resources.Load<GameObject>("Assets/FloatingText");
         parent = GameObject.Find("Animation");
         startSet = Tile.Tiles[to];
         prefab.GetComponentInChildren<Text>().color = textColor;

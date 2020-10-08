@@ -11,27 +11,47 @@ public class EnemyUnit : MonoBehaviour
 
     public string title;
     public int health;
+    public int range = 2;
+    public int damage;
+    public int cooldown = 3;
+    public enum Type { Physical, Magical };
 
-    public void TakeTurn(int tile)
+    public bool preparing;
+    public int cantAttack;
+    public int cantMove;
+
+    public void MoveAction(int tile)
     {
         if (Enemy.occupied[tile])
         {
             string movement = "";
-            if (Enemy.enemies[tile].yPos > PlayerMovement.yPos && Tile.passable[tile - 40])
+            if (Enemy.enemies[tile].yPos > PlayerMovement.yPos)
             {
-                movement += "N";
+                if (Tile.passable[tile - 40])
+                {
+                    movement += "N";
+                }
             }
-            if (Enemy.enemies[tile].yPos < PlayerMovement.yPos && Tile.passable[tile + 40])
+            if (Enemy.enemies[tile].yPos < PlayerMovement.yPos)
             {
-                movement += "S";
+                if (Tile.passable[tile + 40])
+                {
+                    movement += "S";
+                }
             }
-            if (Enemy.enemies[tile].xPos > PlayerMovement.xPos && Tile.passable[tile - 1])
+            if (Enemy.enemies[tile].xPos > PlayerMovement.xPos)
             {
-                movement += "W";
+                if (Tile.passable[tile - 1])
+                {
+                    movement += "W";
+                }
             }
-            if (Enemy.enemies[tile].xPos < PlayerMovement.xPos && Tile.passable[tile + 1])
+            if (Enemy.enemies[tile].xPos < PlayerMovement.xPos)
             {
-                movement += "E";
+                if (Tile.passable[tile + 1])
+                {
+                    movement += "E";
+                }
             }
 
             if (movement.Length > 0)
@@ -57,6 +77,25 @@ public class EnemyUnit : MonoBehaviour
                     enemy.MoveEnemy(GameObject.Find("Enemy" + tile), tile, tile + 1);
                 }
             }
+        }
+    }
+
+    public void PrepareAction(int tile)
+    {
+        Enemy.enemies[tile].preparing = true;
+        AnimaText animaText = new AnimaText();
+        animaText.ShowText(tile, "Prepare", Color.red);
+        GameObject.Find("Enemy" + tile).GetComponentInChildren<Image>().color = Color.red;
+    }
+
+    public void AttackAction(int tile)
+    {
+        if (Enemy.enemies[tile].cantAttack == 0)
+        {
+            Enemy.enemies[tile].preparing = false;
+            AnimaText animaText = new AnimaText();
+            animaText.ShowText(tile, "Attack", Color.red);
+            GameObject.Find("Enemy" + tile).GetComponentInChildren<Image>().color = Color.white;
         }
     }
 }

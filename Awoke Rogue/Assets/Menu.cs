@@ -33,7 +33,7 @@ public class Menu : MonoBehaviour
         playerMovement.MovePlayer(PlayerMovement.tilePos, PlayerMovement.tilePos);
 
         FogOfWar fow = new FogOfWar();
-        fow.ScoutPath(PlayerMovement.tilePos, Ability.scoutRange, false);
+        fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange, false);
 
         Turn turn = new Turn();
         turn.PlayerTurn();

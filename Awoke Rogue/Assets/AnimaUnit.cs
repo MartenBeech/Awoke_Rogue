@@ -29,7 +29,7 @@ public class AnimaUnit : MonoBehaviour
                 {
                     turn.EnemyTurn();
                     FogOfWar fow = new FogOfWar();
-                    fow.ScoutPath(PlayerMovement.tilePos, Ability.scoutRange, false);
+                    fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange, false);
                 }
                 else if (Turn.currentTurn == Turn.CurrentTurn.EnemyNeutral)
                 {
@@ -44,6 +44,8 @@ public class AnimaUnit : MonoBehaviour
         gameObject.GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
         gameObject.GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
         gameObject.GetComponentInChildren<AnimaUnit>().counter = 0.25f;
+
+        
     }
 }
 

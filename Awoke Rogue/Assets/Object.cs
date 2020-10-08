@@ -20,7 +20,7 @@ public class Object : MonoBehaviour
 
     private void EnemySelected(int i)
     {
-        Debug.Log(i.ToString());
+        Debug.Log((Enemy.enemies[i].title) + i.ToString());
     }
 
     private void TileSelected(int i)

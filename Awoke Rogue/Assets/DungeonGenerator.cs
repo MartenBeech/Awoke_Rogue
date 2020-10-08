@@ -9,10 +9,16 @@ public class DungeonGenerator : MonoBehaviour
     public void GenerateDungeon()
     {
         FillWithWalls();
+
         AddRoomSection(20, 1);
 
         AddStartAndExit();
-        AddEnemies(30);
+
+        UnitStat unitStat = new UnitStat();
+        unitStat.DisplayStats(PlayerMovement.tilePos);
+
+        Enemy enemy = new Enemy();
+        enemy.SummonEnemies(30);
     }
 
     private void FillWithWalls()
@@ -245,15 +251,5 @@ public class DungeonGenerator : MonoBehaviour
         if (tile > 39)
             return tile - 39;
         return 0;
-    }
-
-    private void AddEnemies(int amount)
-    {
-        Enemy enemy = new Enemy();
-
-        for (int i = 0; i < amount; i++)
-        {
-            enemy.SummonRandomEnemy(Enemy.Difficulty.Easy);
-        }
     }
 }

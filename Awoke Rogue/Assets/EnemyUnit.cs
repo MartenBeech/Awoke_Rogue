@@ -14,7 +14,8 @@ public class EnemyUnit : MonoBehaviour
     public int range = 2;
     public int damage;
     public int cooldown = 3;
-    public enum Type { Physical, Magical };
+    public enum Type { Melee, Ranged, Magical };
+    public Type type;
 
     public bool preparing;
     public int cantAttack;
@@ -93,9 +94,20 @@ public class EnemyUnit : MonoBehaviour
         if (Enemy.enemies[tile].cantAttack == 0)
         {
             Enemy.enemies[tile].preparing = false;
-            AnimaText animaText = new AnimaText();
-            animaText.ShowText(tile, "Attack", Color.red);
+            DamagePlayer(Enemy.enemies[tile].damage, tile, Enemy.enemies[tile].type);
             GameObject.Find("Enemy" + tile).GetComponentInChildren<Image>().color = Color.white;
         }
+    }
+
+    public void DamagePlayer(int damage, int tile, Type type)
+    {
+        Rng rng = new Rng();
+        damage = rng.Range(Mathf.FloorToInt(damage * 0.5f), Mathf.FloorToInt(damage * 1.5f) + 1);
+        PlayerStat.health -= damage;
+        UnitStat unitStat = new UnitStat();
+        unitStat.DisplayStats(PlayerMovement.tilePos);
+        unitStat.DisplayStats(tile);
+        AnimaText animaText = new AnimaText();
+        animaText.ShowText(PlayerMovement.tilePos, damage.ToString(), Color.red);
     }
 }

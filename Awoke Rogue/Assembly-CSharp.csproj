@@ -55,9 +55,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\UnitStat.cs" />
     <Compile Include="Assets\Enemy.cs" />
     <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\DungeonGenerator.cs" />
+    <Compile Include="Assets\PlayerStat.cs" />
     <Compile Include="Assets\Rng.cs" />
     <Compile Include="Assets\CameraFollow.cs" />
     <Compile Include="Assets\Object.cs" />
@@ -69,8 +71,7 @@
     <Compile Include="Assets\Tile.cs" />
     <Compile Include="Assets\AnimaUnit.cs" />
     <Compile Include="Assets\AnimaText.cs" />
-    <Compile Include="Assets\UnitStat.cs" />
-    <Compile Include="Assets\PlayerStat.cs" />
+    <Compile Include="Assets\PlayerAttack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

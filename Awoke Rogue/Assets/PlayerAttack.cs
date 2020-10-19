@@ -5,33 +5,62 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public static int abilitySelected;
-    public static string[] title = new string[4];
-    public static int[] range = new int[4];
-    public static int[] level = new int[4];
-    public static int[] cooldown = new int[4];
-    public static int[] power = new int[4];
+    public const int SIZE = 6;
+    public static GameObject[] Abilities = new GameObject[SIZE];
+    public static int abilitySelected = SIZE;
+    public static string[] title = new string[SIZE];
+    public static bool[] occupied = new bool[SIZE];
+    public static int[] range = new int[SIZE];
+    public static int[] level = new int[SIZE];
+    public static int[] cooldown = new int[SIZE];
+    public static int[] cooldownMax = new int[SIZE];
+    public static int[] power = new int[SIZE];
     public enum Target { Self, Enemy, Ground};
-    public static Target[] target = new Target[4];
+    public static Target[] target = new Target[SIZE];
 
-
-    public void UseAbility(int i, int tile)
+    private void Start()
     {
-        switch(title[i])
+        for (int i = 0; i < SIZE; i++)
         {
-            case "Crossbow":
-                DamageEnemy(power[i], tile);
-                break;
-
-            case "Piercing Shot":
-
-                break;
-
-            case "Explosive Shot":
-
-                break;
+            Abilities[i] = GameObject.Find("Ability (" + i + ")");
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("1"))
+            AbilityClicked(0);
+        else if (Input.GetKeyDown("2"))
+            AbilityClicked(1);
+        else if (Input.GetKeyDown("3"))
+            AbilityClicked(2);
+        else if (Input.GetKeyDown("4"))
+            AbilityClicked(3);
+        else if (Input.GetKeyDown("5"))
+            AbilityClicked(4);
+        else if (Input.GetKeyDown("6"))
+            AbilityClicked(5);
+    }
+
+    public void UseAbility(int tile)
+    {
+        if (abilitySelected < SIZE)
+        {
+            int i = abilitySelected;
+            if (cooldown[i] == 0)
+            {
+                AbilityEffect ability = new AbilityEffect();
+                ability.UseAbility(i, tile);
+
+                cooldown[i] = cooldownMax[i] + 1;
+                DisplayAbility(i);
+
+                PlayerMovement movement = new PlayerMovement();
+                movement.MovePlayer(PlayerMovement.tilePos, PlayerMovement.tilePos);
+            }
+        }
+    }
+
     public void DamageEnemy(int damage, int tile)
     {
         Rng rng = new Rng();
@@ -41,6 +70,37 @@ public class PlayerAttack : MonoBehaviour
         unitStat.DisplayStats(PlayerMovement.tilePos);
         unitStat.DisplayStats(tile);
         AnimaText animaText = new AnimaText();
-        animaText.ShowText(PlayerMovement.tilePos, damage.ToString(), Color.red);
+        animaText.ShowText(tile, damage.ToString(), Color.red);
+    }
+
+    public void DisplayAbility(int i)
+    {
+        if (cooldown[i] > 0)
+        {
+            Abilities[i].GetComponentInChildren<Text>().text = cooldown[i].ToString();
+            Abilities[i].GetComponentInChildren<Button>().enabled = false;
+            Abilities[i].GetComponentInChildren<Image>().color = Color.gray;
+        }
+        else
+        {
+            Abilities[i].GetComponentInChildren<Text>().text = null;
+            Abilities[i].GetComponentInChildren<Button>().enabled = true;
+            Abilities[i].GetComponentInChildren<Image>().color = Color.white;
+            if (abilitySelected == i)
+            {
+                Abilities[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
+            }
+        }
+    }
+
+    public void AbilityClicked(int i)
+    {
+        abilitySelected = i;
+
+        for (int j = 0; j < SIZE; j++)
+        {
+            Abilities[j].GetComponentInChildren<Image>().color = Color.white;
+        }
+        Abilities[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
     }
 }

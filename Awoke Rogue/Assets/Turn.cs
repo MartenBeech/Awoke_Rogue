@@ -29,6 +29,16 @@ public class Turn : MonoBehaviour
                 }
             }
         }
+
+        for (int i = 0; i < PlayerAttack.SIZE; i++)
+        {
+            PlayerAttack attack = new PlayerAttack();
+            if (PlayerAttack.cooldown[i] > 0)
+            {
+                PlayerAttack.cooldown[i]--;
+                attack.DisplayAbility(i);
+            }
+        }
     }
 
     public void EnemyTurn()

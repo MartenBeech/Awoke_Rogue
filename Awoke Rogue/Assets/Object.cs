@@ -21,6 +21,8 @@ public class Object : MonoBehaviour
     private void EnemySelected(int i)
     {
         Debug.Log((Enemy.enemies[i].title) + i.ToString());
+        PlayerAttack attack = new PlayerAttack();
+        attack.UseAbility(i);
     }
 
     private void TileSelected(int i)

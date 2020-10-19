@@ -37,5 +37,8 @@ public class Menu : MonoBehaviour
 
         Turn turn = new Turn();
         turn.PlayerTurn();
+
+        AbilityEffect ability = new AbilityEffect();
+        ability.GainAbility("Crossbow");
     }
 }

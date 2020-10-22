@@ -39,13 +39,11 @@ public class AnimaUnit : MonoBehaviour
         }
     }
 
-    public void MoveUnit(GameObject gameObject, int from, int to)
+    public void MoveUnit(GameObject gameObject, int from, int to, float counter = 0.25f)
     {
         gameObject.GetComponentInChildren<AnimaUnit>().startPoint = Tile.Tiles[from];
         gameObject.GetComponentInChildren<AnimaUnit>().endPoint = Tile.Tiles[to];
-        gameObject.GetComponentInChildren<AnimaUnit>().counter = 0.25f;
-
-        
+        gameObject.GetComponentInChildren<AnimaUnit>().counter = counter;
     }
 }
 

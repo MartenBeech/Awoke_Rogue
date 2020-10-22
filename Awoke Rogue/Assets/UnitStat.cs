@@ -11,6 +11,17 @@ public class UnitStat : MonoBehaviour
         {
             PlayerMovement.Player.GetComponentInChildren<Text>().text = "<color=green>" + PlayerStat.health + "/" + PlayerStat.healthMax + "</color>";
             PlayerMovement.Player.GetComponentInChildren<Text>().alignment = TextAnchor.LowerCenter;
+            UI.HealthBar.GetComponentInChildren<Text>().text = PlayerStat.health + " / " + PlayerStat.healthMax;
+
+            if (PlayerStat.health > 0)
+            {
+                UI.HealthBar.GetComponentInChildren<Image>().fillAmount = (float)PlayerStat.health / PlayerStat.healthMax;
+            }
+            else
+            {
+                UI.HealthBar.GetComponentInChildren<Image>().fillAmount = 0;
+            }
+            
         }
         else if (Enemy.occupied[tile])
         {

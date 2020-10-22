@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 20661
+  controlID: 14970
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 20662
+  controlID: 14971
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 20663
+  controlID: 14972
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6cbffffff6cbfffffecbffff00ccffff6cd0ffff0ad1ffff46d2fffff6f9ffff5cfbffff
+      m_ExpandedIDs: babeffff2abfffffcac6ffffd8ceffff5cfbffff58500000806d0000be8e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -308,9 +308,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 598.193, y: 313.27032, z: -122.71606}
+    m_Target: {x: 1168.724, y: 682.8556, z: -9.39725}
     speed: 2
-    m_Value: {x: 598.193, y: 313.27032, z: -122.71606}
+    m_Value: {x: 1168.724, y: 682.8556, z: -9.39725}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -361,9 +361,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 596.6673
+    m_Target: 248.24878
     speed: 2
-    m_Value: 596.6673
+    m_Value: 248.24878
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -478,22 +478,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Assets
+    - Assets/Resources/UI
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Assets
+  - Assets/Resources/UI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\morte\Desktop\Background Stuff\Unity\Awoke_Rogue\Awoke
     Rogue
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 56be0000
-    m_LastClickedID: 48726
-    m_ExpandedIDs: 0000000030ba000034ba000000ca9a3b
+    scrollPos: {x: 0, y: 10}
+    m_SelectedIDs: 4a3c0600
+    m_LastClickedID: 408650
+    m_ExpandedIDs: 00000000ccba0000d4ba000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -521,7 +521,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000030ba000000ca9a3b
+    m_ExpandedIDs: 00000000ccba000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -546,8 +546,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 46d2ffff
-    m_LastClickedInstanceID: -11706
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000623500005a3400007e37000000000000
     m_RenameOverlay:
@@ -659,7 +659,7 @@ MonoBehaviour:
     m_CachedPref: 160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -11706
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_AssetGUID: 
   m_InstanceID: 0

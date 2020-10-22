@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     public static GameObject[] Abilities = new GameObject[SIZE];
     public static int abilitySelected = SIZE;
     public static string[] title = new string[SIZE];
+    public static string[] description = new string[SIZE];
     public static bool[] occupied = new bool[SIZE];
     public static int[] range = new int[SIZE];
     public static int[] level = new int[SIZE];
@@ -55,8 +56,8 @@ public class PlayerAttack : MonoBehaviour
                 cooldown[i] = cooldownMax[i] + 1;
                 DisplayAbility(i);
 
-                PlayerMovement movement = new PlayerMovement();
-                movement.MovePlayer(PlayerMovement.tilePos, PlayerMovement.tilePos);
+                UI ui = new UI();
+                ui.EndTurn();
             }
         }
     }
@@ -88,7 +89,7 @@ public class PlayerAttack : MonoBehaviour
             Abilities[i].GetComponentInChildren<Image>().color = Color.white;
             if (abilitySelected == i)
             {
-                Abilities[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
+                Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
             }
         }
     }
@@ -99,8 +100,9 @@ public class PlayerAttack : MonoBehaviour
 
         for (int j = 0; j < SIZE; j++)
         {
-            Abilities[j].GetComponentInChildren<Image>().color = Color.white;
+            Abilities[j].GetComponentInChildren<Outline>().effectColor = Color.black;
         }
-        Abilities[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
+        Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
+        UI.Description.GetComponentInChildren<Text>().text = description[i];
     }
 }

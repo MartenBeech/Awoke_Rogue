@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void MovePlayer(int from, int to)
+    public void MovePlayer(int from, int to, float counter = 0.25f)
     {
         tilePos = to;
         xPos = tilePos % 40;
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         Player.name = "Player" + to.ToString();
 
         AnimaUnit animaUnit = new AnimaUnit();
-        animaUnit.MoveUnit(Player, from, to);
+        animaUnit.MoveUnit(Player, from, to, counter);
 
         Tile.passable[from] = true;
         Tile.passable[to] = false;

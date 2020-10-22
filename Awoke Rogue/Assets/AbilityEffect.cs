@@ -44,6 +44,7 @@ public class AbilityEffect : MonoBehaviour
             switch (title)
             {
                 case "Crossbow":
+                    PlayerAttack.description[i] = "Shoot an arrow at an enemy";
                     PlayerAttack.range[i] = 4;
                     PlayerAttack.level[i] = 1;
                     PlayerAttack.cooldownMax[i] = 1;

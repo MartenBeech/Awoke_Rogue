@@ -18,7 +18,9 @@ public class DungeonGenerator : MonoBehaviour
         unitStat.DisplayStats(PlayerMovement.tilePos);
 
         Enemy enemy = new Enemy();
-        enemy.SummonEnemies(30);
+        enemy.SummonBoss();
+        enemy.SummonNormalEnemies(30);
+        
     }
 
     private void FillWithWalls()
@@ -136,6 +138,7 @@ public class DungeonGenerator : MonoBehaviour
 
         if (treasureRoom)
         {
+            List<int> tiles = new List<int>();
             List<int> gatePlacements = new List<int>();
             for (int y = yStart; y <= yEnd; y++)
             {
@@ -159,6 +162,7 @@ public class DungeonGenerator : MonoBehaviour
                             {
                                 tile.AddFloor(x + (40 * y), (x - xStart - 2) + ((y - yStart - 2) * 4), Tile.Type.Treasure);
                             }
+                            tiles.Add(x + (40 * y));
                         }
                     }
                 }
@@ -168,6 +172,10 @@ public class DungeonGenerator : MonoBehaviour
             gatePlacements.Remove((xStart + 1) + (40 * (yEnd - 1)));
             gatePlacements.Remove((xEnd - 1) + (40 * (yEnd - 1)));
             tile.AddGateClosed(gatePlacements[rng.Range(0, gatePlacements.Count)]);
+            Object.gateOpened = false;
+
+            Enemy enemy = new Enemy();
+            enemy.SummonTreasureEnemies(3, tiles);
         }
     }
 

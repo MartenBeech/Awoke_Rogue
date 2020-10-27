@@ -40,5 +40,9 @@ public class Menu : MonoBehaviour
 
         AbilityEffect ability = new AbilityEffect();
         ability.GainAbility("Crossbow");
+
+        PlayerStat.health = PlayerStat.healthMax;
+        UnitStat unitStat = new UnitStat();
+        unitStat.DisplayStats(PlayerMovement.tilePos);
     }
 }

@@ -10,10 +10,10 @@ public class EnemyUnit : MonoBehaviour
     public int tilePos;
 
     public string title;
-    public int health;
-    public int range = 2;
-    public int damage;
-    public int cooldown = 3;
+    public int health = 20;
+    public int range = 1;
+    public int damage = 4;
+    public int cooldown = 1;
     public enum Type { Melee, Ranged, Magical };
     public Type type;
 

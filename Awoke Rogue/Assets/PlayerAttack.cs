@@ -96,13 +96,26 @@ public class PlayerAttack : MonoBehaviour
 
     public void AbilityClicked(int i)
     {
-        abilitySelected = i;
-
-        for (int j = 0; j < SIZE; j++)
+        if (Abilities[i].GetComponentInChildren<Button>().enabled)
         {
-            Abilities[j].GetComponentInChildren<Outline>().effectColor = Color.black;
+            if (abilitySelected == i)
+            {
+                Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.black;
+                UI.Description.GetComponentInChildren<Text>().text = null;
+                abilitySelected = SIZE;
+            }
+
+            else
+            {
+                abilitySelected = i;
+
+                for (int j = 0; j < SIZE; j++)
+                {
+                    Abilities[j].GetComponentInChildren<Outline>().effectColor = Color.black;
+                }
+                Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
+                UI.Description.GetComponentInChildren<Text>().text = description[i];
+            }
         }
-        Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
-        UI.Description.GetComponentInChildren<Text>().text = description[i];
     }
 }

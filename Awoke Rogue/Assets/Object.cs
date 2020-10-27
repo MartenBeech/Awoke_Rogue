@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Object : MonoBehaviour
 {
+    public static bool gateOpened = false;
     public void EnemyClicked()
     {
         string name = this.name.Replace("Enemy", "");
@@ -28,5 +29,21 @@ public class Object : MonoBehaviour
     private void TileSelected(int i)
     {
         Debug.Log(Tile.type[i] + i.ToString());
+    }
+
+    private void OpenGate()
+    {
+        for (int i = 0; i < Tile.SIZE; i++)
+        {
+            if (Tile.type[i] == Tile.Type.TreasureGateClosed)
+            {
+                Tile.type[i] = Tile.Type.TreasureGateOpen;
+                gateOpened = true;
+                Tile.Tiles[i].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Objects/GateOpen");
+                Tile.passable[i] = true;
+
+                break;
+            }
+        }
     }
 }

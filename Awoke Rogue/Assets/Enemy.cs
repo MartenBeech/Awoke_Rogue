@@ -11,10 +11,11 @@ public class Enemy : MonoBehaviour
     public static EnemyUnit[] enemies = new EnemyUnit[SIZE];
     public static bool[] occupied = new bool[SIZE];
 
-    public void SummonEnemies(int amount)
+    public void SummonNormalEnemies(int amount)
     {
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
-        enemyList.Add(UnitStat.Units.DireWolf);
+        UnitStat unitStat = new UnitStat();
+        enemyList = unitStat.GetUnitLevels(1);
 
         for (int i = 0; i < amount; i++)
         {
@@ -23,20 +24,40 @@ public class Enemy : MonoBehaviour
             {
                 rnd = rng.Range(0, 1600);
             }
-            while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
+            while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd] || occupied[rnd]);
 
             SummonEnemy(rnd, enemyList[rng.Range(0, enemyList.Count)]);
         }
     }
 
-    public void SummonTreasureEnemies(int amount)
+    public void SummonTreasureEnemies(int amount, List<int> tiles)
     {
+        List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
+        UnitStat unitStat = new UnitStat();
+        enemyList = unitStat.GetUnitLevels(2);
 
+        for (int i = 0; i < amount; i++)
+        {
+            int rnd = rng.Range(0, tiles.Count);
+            SummonEnemy(tiles[rnd], enemyList[rng.Range(0, enemyList.Count)]);
+            tiles.RemoveAt(rnd);
+        }
     }
 
     public void SummonBoss()
     {
+        List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
+        UnitStat unitStat = new UnitStat();
+        enemyList = unitStat.GetUnitLevels(3);
 
+        for (int i = 0; i < Tile.SIZE; i++)
+        {
+            if (Tile.type[i] == Tile.Type.End)
+            {
+                SummonEnemy(i, enemyList[rng.Range(0, enemyList.Count)]);
+                break;
+            }
+        }
     }
 
     public void SummonEnemy(int tile, UnitStat.Units unit)
@@ -51,7 +72,7 @@ public class Enemy : MonoBehaviour
 
         GameObject prefab = Resources.Load<GameObject>("Assets/Enemy");
         GameObject parent = GameObject.Find("Enemies");
-        prefab = Instantiate(prefab, Tile.Tiles[tile].transform.position, Tile.Tiles[tile].transform.rotation, parent.transform);
+        prefab = Instantiate(prefab, Tile.Tiles[tile].transform.position, new Quaternion(0,0,0,0), parent.transform);
         
         prefab.name = "Enemy" + tile.ToString();
 

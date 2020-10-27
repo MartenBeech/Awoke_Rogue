@@ -62,7 +62,7 @@ public class Turn : MonoBehaviour
             {
                 for (int i = 0; i < enemies.Count; i++)
                 {
-                    if (distance.GetDistanceToPlayer(enemies[i]) == range)
+                    if (distance.GetDistanceToPlayer(enemies[i]) == range && !(Tile.type[Enemy.enemies[enemies[i]].tilePos] == Tile.Type.TreasureFloor && !Object.gateOpened))
                     {
                         sortedEnemies.Add(enemies[i]);
                         enemies.RemoveAt(i);

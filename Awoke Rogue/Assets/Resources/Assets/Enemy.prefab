@@ -167,6 +167,15 @@ MonoBehaviour:
   tilePos: 0
   title: 
   health: 0
+  range: 1
+  damage: 4
+  cooldown: 1
+  type: 0
+  preparing: 0
+  cantAttack: 0
+  cantMove: 0
+  boss: 0
+  keyCarrier: 0
 --- !u!114 &-4446187627092743080
 MonoBehaviour:
   m_ObjectHideFlags: 0

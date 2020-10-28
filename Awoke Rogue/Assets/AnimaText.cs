@@ -10,7 +10,7 @@ public class AnimaText : MonoBehaviour
     public static GameObject parent;
     private static int dealerSet;
     private float counter = 1f;
-    private static int bufSize = 0;
+    public static int bufNmb = 0;
     private static GameObject[] bufPrefab = new GameObject[50];
     private static GameObject[] bufPos = new GameObject[50];
     private static string[] bufText = new string[50];
@@ -26,14 +26,14 @@ public class AnimaText : MonoBehaviour
     {
         if (counter > 0)
         {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.005f);
+            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.05f);
             counter -= Time.deltaTime;
 
             if (counter <= 0.5 && !bufDecreased)
             {
                 bufDecreased = true;
                 
-                for (int i = 0; i < bufSize; i++)
+                for (int i = 0; i < bufNmb; i++)
                 {
                     bufPrefab[i] = bufPrefab[i + 1];
                     bufPos[i] = bufPos[i + 1];
@@ -41,14 +41,14 @@ public class AnimaText : MonoBehaviour
                     bufColor[i] = bufColor[i + 1];
                     bufDealer[i] = bufDealer[i + 1];
                 }
-                bufSize--;
+                bufNmb--;
 
-                if (bufSize > 0)
+                if (bufNmb > 0)
                 {
                     bufPrefab[0].GetComponentInChildren<Text>().color = bufColor[0];
                     bufPrefab[0].GetComponentInChildren<Text>().text = bufText[0];
 
-                    Instantiate(bufPrefab[0], bufPos[0].transform.position, bufPos[0].transform.rotation, GameObject.Find("Animation").transform);
+                    Instantiate(bufPrefab[0], bufPos[0].transform.position, new Quaternion(0, 0, 0, 0), GameObject.Find("Animation").transform);
                 }
             }
 
@@ -67,16 +67,16 @@ public class AnimaText : MonoBehaviour
         prefab.GetComponentInChildren<Text>().color = textColor;
         prefab.GetComponentInChildren<Text>().text = text;
 
-        bufPos[bufSize] = startSet;
-        bufText[bufSize] = prefab.GetComponentInChildren<Text>().text;
-        bufColor[bufSize] = prefab.GetComponentInChildren<Text>().color;
-        bufPrefab[bufSize] = prefab;
-        bufDealer[bufSize] = dealerSet;
+        bufPos[bufNmb] = startSet;
+        bufText[bufNmb] = prefab.GetComponentInChildren<Text>().text;
+        bufColor[bufNmb] = prefab.GetComponentInChildren<Text>().color;
+        bufPrefab[bufNmb] = prefab;
+        bufDealer[bufNmb] = dealerSet;
 
-        if (bufSize == 0)
+        if (bufNmb == 0)
         {
-            Instantiate(bufPrefab[0], bufPos[0].transform.position, bufPos[0].transform.rotation, parent.transform);
+            Instantiate(bufPrefab[0], bufPos[0].transform.position, new Quaternion(0, 0, 0, 0), parent.transform);
         }
-        bufSize++;
+        bufNmb++;
     }
 }

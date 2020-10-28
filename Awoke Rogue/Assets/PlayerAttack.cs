@@ -48,7 +48,8 @@ public class PlayerAttack : MonoBehaviour
         if (abilitySelected < SIZE)
         {
             int i = abilitySelected;
-            if (cooldown[i] == 0)
+            Distance distance = new Distance();
+            if (cooldown[i] == 0 && distance.GetDistanceToPlayer(tile) <= range[i])
             {
                 AbilityEffect ability = new AbilityEffect();
                 ability.UseAbility(i, tile);
@@ -72,6 +73,12 @@ public class PlayerAttack : MonoBehaviour
         unitStat.DisplayStats(tile);
         AnimaText animaText = new AnimaText();
         animaText.ShowText(tile, damage.ToString(), Color.red);
+
+        if (Enemy.enemies[tile].health <= 0)
+        {
+            Enemy enemy = new Enemy();
+            enemy.Destroy(tile);
+        }
     }
 
     public void DisplayAbility(int i)

@@ -10,7 +10,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         FillWithWalls();
 
-        AddRoomSection(20, 1);
+        AddRoomSection(2, 1);
 
         AddStartAndExit();
 
@@ -19,8 +19,7 @@ public class DungeonGenerator : MonoBehaviour
 
         Enemy enemy = new Enemy();
         enemy.SummonBoss();
-        enemy.SummonNormalEnemies(30);
-        
+        enemy.SummonNormalEnemies(1);
     }
 
     private void FillWithWalls()
@@ -29,7 +28,6 @@ public class DungeonGenerator : MonoBehaviour
         {
             Tile tile = new Tile();
             tile.AddWall(i);
-            tile.RotateTile(Tile.Tiles[i], 0);
         }
     }
 

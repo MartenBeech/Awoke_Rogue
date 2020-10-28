@@ -8,11 +8,10 @@ public class CameraFollow : MonoBehaviour
     private GameObject player;
     public Vector3 offset;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.Find("Player");
     }
-
     void Update()
     {
         transform.position = player.transform.position + offset;

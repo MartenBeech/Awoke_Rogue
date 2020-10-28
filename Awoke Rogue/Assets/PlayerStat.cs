@@ -9,4 +9,6 @@ public class PlayerStat : MonoBehaviour
     public static int stealthRange = 5;
     public static int healthMax = 20;
     public static int health = healthMax;
+
+    public static bool keyObtained;
 }

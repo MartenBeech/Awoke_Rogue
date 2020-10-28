@@ -47,13 +47,13 @@ public class AbilityEffect : MonoBehaviour
                     PlayerAttack.description[i] = "Shoot an arrow at an enemy";
                     PlayerAttack.range[i] = 4;
                     PlayerAttack.level[i] = 1;
-                    PlayerAttack.cooldownMax[i] = 1;
+                    PlayerAttack.cooldown[i] = 0;
                     PlayerAttack.power[i] = 4;
                     PlayerAttack.target[i] = PlayerAttack.Target.Enemy;
                     PlayerAttack.Abilities[i].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Abilities/Crossbow");
                     break;
             }
-            PlayerAttack.cooldown[i] = PlayerAttack.cooldownMax[i];
+            PlayerAttack.cooldownMax[i] = PlayerAttack.cooldown[i];
 
             PlayerAttack attack = new PlayerAttack();
             attack.DisplayAbility(i);

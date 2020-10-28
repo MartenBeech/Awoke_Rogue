@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Scene
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -119,10 +119,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 679, y: 471}
+  m_MaxSize: {x: 14001, y: 14021}
   vertical: 0
-  controlID: 794
+  controlID: 69095
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,10 +144,10 @@ MonoBehaviour:
     y: 0
     width: 1368
     height: 947
-  m_MinSize: {x: 403, y: 492}
-  m_MaxSize: {x: 10001, y: 14042}
+  m_MinSize: {x: 403, y: 471}
+  m_MaxSize: {x: 10000, y: 14021}
   vertical: 1
-  controlID: 795
+  controlID: 69096
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 796
+  controlID: 69097
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -396,10 +396,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
+      scrollPos: {x: 0, y: 26534}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4cfbffff
+      m_ExpandedIDs: 78a0fdffc4a1fdff12a3fdffcca4fdff1aa6fdff64a7fdffb2a8fdfffca9fdff46abfdff90acfdffdaadfdff28affdff72b0fdffbeb1fdff08b3fdff52b4fdff9cb5fdffeab6fdff46b8fdff90b9fdffdcbafdff28bcfdff74bdfdffbebefdff0cc0fdff54c1fdff9ec2fdffe8c3fdff34c5fdff7ec6fdffc8c7fdff12c9fdff5ccafdffa6cbfdfff0ccfdff3acefdff84cffdffced0fdff1ed2fdff7819feff0e1dfeff8084feffba84feffd084feff1685feff3e85feff6e85fefff085feffa286feffa486feffda86feff9487feffd887fefff487feff4689fefff08afeff028bfeff068cfeff968dfefffa8dfeffc88efeffd68efeff3c8ffeffa68ffeff3a90feff5290feffc890fefffa90feff1a91feff3092feff4a92feff9692feffc095fefffa96feff0a97feff0c97feff0498feffbc98feff7e9cfeffe09cfefff09cfeff089efeff44cefeff3ec6ffffd8cbffffeecbffff30cfffff42d4ffff76d4ffff4cd5ffff20d6ffffead6fffffcd6ffff1cd7ffff32d7ffff3edeffffcae3fffff8e3ffff2ee4fffffee4fffffce5ffff7ce6ffff1ae7ffff38e7ffff4ae7ffff5ce7ffffaae7ffffcee7ffffe0e7ffff16e8ffff5cfbffff4a0000002e890400c2c10400b43f0600c03f0600a2370c007ecc0e0060e70e00b8080f00880d0f008a240f00
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -459,9 +459,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0.01099968, z: 0}
+    m_Target: {x: 1182.0435, y: 719.1891, z: -168.12936}
     speed: 2
-    m_Value: {x: 0, y: 0.01099968, z: 0}
+    m_Value: {x: 1182.0435, y: 719.1891, z: -168.12936}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -512,9 +512,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 42.426407
+    m_Target: 101.40757
     speed: 2
-    m_Value: 42.426407
+    m_Value: 101.40757
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -602,22 +602,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/UI
+    - Assets
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/UI
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\morte\Desktop\Background Stuff\Unity\Awoke_Rogue\Awoke
     Rogue
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 10}
-    m_SelectedIDs: 30bb0000
-    m_LastClickedID: 47920
-    m_ExpandedIDs: 0000000024bb00002cbb000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 1ebb0000
+    m_LastClickedID: 47902
+    m_ExpandedIDs: 000000001ebb000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -645,7 +645,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000024bb000000ca9a3b
+    m_ExpandedIDs: 000000001ebb000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

@@ -21,6 +21,9 @@ public class EnemyUnit : MonoBehaviour
     public int cantAttack;
     public int cantMove;
 
+    public bool boss;
+    public bool keyCarrier;
+
     public void MoveAction(int tile)
     {
         if (Enemy.occupied[tile])
@@ -84,8 +87,8 @@ public class EnemyUnit : MonoBehaviour
     public void PrepareAction(int tile)
     {
         Enemy.enemies[tile].preparing = true;
-        AnimaText animaText = new AnimaText();
-        animaText.ShowText(tile, "Prepare", Color.red);
+        //AnimaText animaText = new AnimaText();
+        //animaText.ShowText(tile, "Prepare", Color.red);
         GameObject.Find("Enemy" + tile).GetComponentInChildren<Image>().color = Color.red;
     }
 

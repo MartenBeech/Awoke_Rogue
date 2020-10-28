@@ -15,6 +15,24 @@ public class Distance : MonoBehaviour
         return xDis + yDis;
     }
 
+    public int GetDistanceToPlayerSquare(int tile)
+    {
+        int xPos = tile % 40;
+        int yPos = tile / 40;
+        int xDis = Mathf.Abs(xPos - PlayerMovement.xPos);
+        int yDis = Mathf.Abs(yPos - PlayerMovement.yPos);
+
+        if (xDis >= yDis)
+        {
+            return xDis;
+        }
+        else
+        {
+            return yDis;
+        }
+        
+    }
+
     public List<int> GetEnemiesAroundPlayer(int range)
     {
         List<int> tiles = new List<int>();

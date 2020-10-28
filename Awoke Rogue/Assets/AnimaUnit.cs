@@ -8,10 +8,14 @@ public class AnimaUnit : MonoBehaviour
     public GameObject startPoint;
     public GameObject endPoint;
 
-    public float counter = 0f;
+    public float counter = 100f;
     void Update()
     {
-        if (counter > 0)
+        if (counter == 100f)
+        {
+
+        }
+        else if (counter > 0)
         {
             Vector3 dir = endPoint.transform.position - startPoint.transform.position;
             float dist = Mathf.Sqrt(
@@ -22,6 +26,7 @@ public class AnimaUnit : MonoBehaviour
 
             if (counter <= 0)
             {
+                counter = 100f;
                 this.transform.position = new Vector3(endPoint.transform.position.x, endPoint.transform.position.y, -0.01f);
 
                 Turn turn = new Turn();
@@ -30,6 +35,8 @@ public class AnimaUnit : MonoBehaviour
                     turn.EnemyTurn();
                     FogOfWar fow = new FogOfWar();
                     fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange, false);
+                    fow.ScoutTiles();
+                    fow.ScoutEnemies();
                 }
                 else if (Turn.currentTurn == Turn.CurrentTurn.EnemyNeutral)
                 {

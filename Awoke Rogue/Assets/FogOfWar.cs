@@ -102,13 +102,11 @@ public class FogOfWar : MonoBehaviour
                 }
             }
         }
-
-        scouted[center] = true;
-        Scout();
     }
 
-    private void Scout()
+    public void ScoutTiles()
     {
+        scouted[PlayerMovement.tilePos] = true;
         for (int i = 0; i < Tile.SIZE; i++)
         {
             if (!scouted[i])
@@ -118,6 +116,26 @@ public class FogOfWar : MonoBehaviour
             else
             {
                 Tile.Tiles[i].GetComponentInChildren<Image>().color = Color.white;
+            }
+        }
+        Map map = new Map();
+        map.ScoutMap(0, 40);
+    }
+
+    public void ScoutEnemies()
+    {
+        for (int i = 0; i < Tile.SIZE; i++)
+        {
+            if (Enemy.occupied[i])
+            {
+                if (scouted[i])
+                {
+                    GameObject.Find("Enemy" + i).GetComponentInChildren<Transform>().localScale = new Vector3(1f, 1f);
+                }
+                else
+                {
+                    GameObject.Find("Enemy" + i).GetComponentInChildren<Transform>().localScale = new Vector3(0.5f, 0.5f);
+                }
             }
         }
     }

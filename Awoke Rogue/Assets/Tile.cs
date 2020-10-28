@@ -99,6 +99,5 @@ public class Tile : MonoBehaviour
     {
         angle = (angle * 2 * Mathf.PI / 360);
         gameObject.transform.rotation = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y, Mathf.Sin(angle / 2), Mathf.Cos(angle / 2));
-        gameObject.GetComponentInChildren<Text>().transform.rotation = new Quaternion(gameObject.GetComponentInChildren<Text>().transform.rotation.x, gameObject.GetComponentInChildren<Text>().transform.rotation.y, 0, 1);
     }
 }

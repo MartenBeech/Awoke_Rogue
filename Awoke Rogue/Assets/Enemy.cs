@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
         UnitStat unitStat = new UnitStat();
         enemyList = unitStat.GetUnitLevels(1);
+        int keyCarrier = rng.Range(0, amount);
 
         for (int i = 0; i < amount; i++)
         {
@@ -27,6 +28,10 @@ public class Enemy : MonoBehaviour
             while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd] || occupied[rnd]);
 
             SummonEnemy(rnd, enemyList[rng.Range(0, enemyList.Count)]);
+            if (i == keyCarrier)
+            {
+                enemies[rnd].keyCarrier = true;
+            }
         }
     }
 
@@ -102,6 +107,10 @@ public class Enemy : MonoBehaviour
             enemies[to].cantAttack = enemies[from].cantAttack;
             enemies[to].cantMove = enemies[from].cantMove;
 
+            enemies[to].boss = enemies[from].boss;
+            enemies[to].keyCarrier = enemies[from].keyCarrier;
+
+
             GameObject.Find("Enemy" + from.ToString()).name = "Enemy" + to.ToString();
 
             occupied[from] = false;
@@ -117,6 +126,12 @@ public class Enemy : MonoBehaviour
 
     public void Destroy(int tile)
     {
+        if (enemies[tile].keyCarrier)
+        {
+            PlayerStat.keyObtained = true;
+            AnimaText text = new AnimaText();
+            text.ShowText(tile, "Gate Key obtained", Color.cyan);
+        }
         GameObject.Destroy(GameObject.Find("Enemy" + tile.ToString()));
         enemies[tile] = null;
         occupied[tile] = false;

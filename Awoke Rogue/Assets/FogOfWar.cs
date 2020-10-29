@@ -30,76 +30,374 @@ public class FogOfWar : MonoBehaviour
 
     public void ScoutPath(int center, int range, bool farSight)
     {
-        if (!farSight)
+        //if (!farSight)
+        //{
+        //    int tile;
+        //    if (range <= 0)
+        //        return;
+
+        //    tile = GetAvailableTile(-1, 0, center);
+        //    if (tile < 1600)
+        //    {
+        //        scouted[tile] = true;
+        //        if (Tile.passable[tile])
+        //        {
+        //            ScoutPath(tile, range - 1, farSight);
+        //        }
+        //    }
+
+        //    tile = GetAvailableTile(1, 0, center);
+        //    if (tile < 1600)
+        //    {
+        //        scouted[tile] = true;
+        //        if (Tile.passable[tile])
+        //        {
+        //            ScoutPath(tile, range - 1, farSight);
+        //        }
+        //    }
+
+        //    tile = GetAvailableTile(0, -1, center);
+        //    if (tile < 1600)
+        //    {
+        //        scouted[tile] = true;
+        //        if (Tile.passable[tile])
+        //        {
+        //            ScoutPath(tile, range - 1, farSight);
+        //        }
+        //    }
+
+        //    tile = GetAvailableTile(0, 1, center);
+        //    if (tile < 1600)
+        //    {
+        //        scouted[tile] = true;
+        //        if (Tile.passable[tile])
+        //        {
+        //            ScoutPath(tile, range - 1, farSight);
+        //        }
+        //    }
+        //}
+
+        //else if (farSight)
+        //{
+        //    List<int> tileList = new List<int>();
+
+        //    for (int Y = -range; Y <= range; Y++)
+        //    {
+        //        for (int X = -range; X <= range; X++)
+        //        {
+        //            if (Mathf.Abs(X) + Mathf.Abs(Y) <= range)
+        //            {
+        //                int tile = GetAvailableTile(X, Y, center);
+        //                if (tile < 1600)
+        //                    tileList.Add(tile);
+        //            }
+        //        }
+        //    }
+
+        //    for (int i = 0; i < tileList.Count; i++)
+        //    {
+        //        if (Tile.passable[tileList[i]])
+        //        {
+        //            scouted[tileList[i]] = true;
+        //        }
+        //    }
+        //}
+
+        int tile, sideTile;
+
+        for (int i = 1; i <= range; i++)                    //EAST
         {
-            int tile;
-            if (range <= 0)
-                return;
-
-            tile = GetAvailableTile(-1, 0, center);
+            tile = GetAvailableTile(i, 0, center);
             if (tile < 1600)
             {
                 scouted[tile] = true;
-                if (Tile.passable[tile])
+                if (i != range)
                 {
-                    ScoutPath(tile, range - 1, farSight);
+                    sideTile = GetAvailableTile(i, 1, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
+                    }
+                    sideTile = GetAvailableTile(i, -1, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
+                    }
+                }
+                if (!Tile.passable[tile])
+                {
+                    break;
                 }
             }
-
-            tile = GetAvailableTile(1, 0, center);
-            if (tile < 1600)
+            else
             {
-                scouted[tile] = true;
-                if (Tile.passable[tile])
-                {
-                    ScoutPath(tile, range - 1, farSight);
-                }
-            }
-
-            tile = GetAvailableTile(0, -1, center);
-            if (tile < 1600)
-            {
-                scouted[tile] = true;
-                if (Tile.passable[tile])
-                {
-                    ScoutPath(tile, range - 1, farSight);
-                }
-            }
-
-            tile = GetAvailableTile(0, 1, center);
-            if (tile < 1600)
-            {
-                scouted[tile] = true;
-                if (Tile.passable[tile])
-                {
-                    ScoutPath(tile, range - 1, farSight);
-                }
+                break;
             }
         }
 
-        else if (farSight)
+        for (int i = 1; i <= range; i++)                    //WEST
         {
-            List<int> tileList = new List<int>();
-
-            for (int Y = -range; Y <= range; Y++)
+            tile = GetAvailableTile(-i, 0, center);
+            if (tile < 1600)
             {
-                for (int X = -range; X <= range; X++)
+                scouted[tile] = true;
+                if (i != range)
                 {
-                    if (Mathf.Abs(X) + Mathf.Abs(Y) <= range)
+                    sideTile = GetAvailableTile(-i, 1, center);
+                    if (sideTile < 1600)
                     {
-                        int tile = GetAvailableTile(X, Y, center);
-                        if (tile < 1600)
-                            tileList.Add(tile);
+                        scouted[sideTile] = true;
+                    }
+                    sideTile = GetAvailableTile(-i, -1, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
                     }
                 }
-            }
-
-            for (int i = 0; i < tileList.Count; i++)
-            {
-                if (Tile.passable[tileList[i]])
+                if (!Tile.passable[tile])
                 {
-                    scouted[tileList[i]] = true;
+                    break;
                 }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        for (int i = 1; i <= range; i++)                    //SOUTH
+        {
+            tile = GetAvailableTile(0, i, center);
+            if (tile < 1600)
+            {
+                scouted[tile] = true;
+                if (i != range)
+                {
+                    sideTile = GetAvailableTile(1, i, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
+                    }
+                    sideTile = GetAvailableTile(-1, i, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
+                    }
+                }
+                if (!Tile.passable[tile])
+                {
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        for (int i = 1; i <= range; i++)                    //NORTH
+        {
+            tile = GetAvailableTile(0, -i, center);
+            if (tile < 1600)
+            {
+                scouted[tile] = true;
+                if (i != range)
+                {
+                    sideTile = GetAvailableTile(1, -i, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
+                    }
+                    sideTile = GetAvailableTile(-1, -i, center);
+                    if (sideTile < 1600)
+                    {
+                        scouted[sideTile] = true;
+                    }
+                }
+                if (!Tile.passable[tile])
+                {
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        for (int i = 1; i <= range/2; i++)                    //SOUTHEAST
+        {
+            tile = GetAvailableTile(i, i, center);
+            if (tile < 1600)
+            {
+                scouted[tile] = true;
+                if (Tile.passable[tile])
+                {
+                    tile = GetAvailableTile(i, i + 1, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(i - 1, i, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                    tile = GetAvailableTile(i + 1, i, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(i, i - 1, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        for (int i = 1; i <= range / 2; i++)                    //NORTHEAST
+        {
+            tile = GetAvailableTile(i, -i, center);
+            if (tile < 1600)
+            {
+                scouted[tile] = true;
+                if (Tile.passable[tile])
+                {
+                    tile = GetAvailableTile(i, -i - 1, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(i - 1, -i, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                    tile = GetAvailableTile(i + 1, -i, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(i, -i + 1, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        for (int i = 1; i <= range / 2; i++)                    //SOUTHWEST
+        {
+            tile = GetAvailableTile(-i, i, center);
+            if (tile < 1600)
+            {
+                scouted[tile] = true;
+                if (Tile.passable[tile])
+                {
+                    tile = GetAvailableTile(-i, i + 1, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(-i + 1, i, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                    tile = GetAvailableTile(-i - 1, i, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(-i, i - 1, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        for (int i = 1; i <= range / 2; i++)                    //NORTHWEST
+        {
+            tile = GetAvailableTile(-i, -i, center);
+            if (tile < 1600)
+            {
+                scouted[tile] = true;
+                if (Tile.passable[tile])
+                {
+                    tile = GetAvailableTile(-i, -i - 1, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(-i + 1, -i, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                    tile = GetAvailableTile(-i - 1, -i, center);
+                    if (tile < 1600)
+                    {
+                        sideTile = GetAvailableTile(-i, -i + 1, center);
+                        if (sideTile < 1600)
+                        {
+                            if (Tile.passable[sideTile])
+                            {
+                                scouted[tile] = true;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                break;
             }
         }
     }

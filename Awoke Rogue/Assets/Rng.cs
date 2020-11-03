@@ -26,4 +26,19 @@ public class Rng : MonoBehaviour
         float temp = number / 1000;
         return Mathf.FloorToInt(temp);
     }
+
+    public bool GetPercentage(int percentage)
+    {
+        int rnd = Range(0, 100);
+        if (rnd < percentage)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public int GetPlusMinus50PerCent(int amount)
+    {
+        return Range(Mathf.FloorToInt(amount * 0.5f), Mathf.FloorToInt(amount * 1.5f) + 1);
+    }
 }

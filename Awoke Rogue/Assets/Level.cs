@@ -38,18 +38,23 @@ public class Level : MonoBehaviour
         playerMovement.MovePlayer(PlayerMovement.tilePos, PlayerMovement.tilePos);
 
         FogOfWar fow = new FogOfWar();
-        fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange, false);
+        fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange);
         fow.ScoutTiles();
         fow.ScoutEnemies();
 
         Map map = new Map();
-        map.ScoutMap(0, 40);
+        map.HideMap();
+        map.ScoutMap(PlayerMovement.tilePos, 40);
 
         Turn turn = new Turn();
         turn.PlayerTurn();
 
-        PlayerStat.health = PlayerStat.healthMax;
-        UnitStat unitStat = new UnitStat();
-        unitStat.DisplayStats(PlayerMovement.tilePos);
+        PlayerStat playerStat = new PlayerStat();
+        playerStat.ResetStats();
+    }
+
+    public void WinLevel()
+    {
+        NewLevel();
     }
 }

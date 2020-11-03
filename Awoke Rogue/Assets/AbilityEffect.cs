@@ -7,11 +7,21 @@ public class AbilityEffect : MonoBehaviour
 {
     public void UseAbility(int i, int tile)
     {
+        Rng rng = new Rng();
         PlayerAttack attack = new PlayerAttack();
+        PlayerStat stat = new PlayerStat();
         switch (PlayerAttack.title[i])
         {
             case "Crossbow":
-                attack.DamageEnemy(PlayerAttack.power[i], tile);
+                if (stat.ConsumeRage())
+                {
+                    attack.DamageEnemy(PlayerAttack.power[i] * 3, tile);
+                }
+                else
+                {
+                    attack.DamageEnemy(rng.GetPlusMinus50PerCent(PlayerAttack.power[i]), tile);
+                    stat.GainRage(rng.Range(10, 21));
+                }
                 break;
 
             case "Piercing Shot":

@@ -34,7 +34,7 @@ public class AnimaUnit : MonoBehaviour
                 {
                     turn.EnemyTurn();
                     FogOfWar fow = new FogOfWar();
-                    fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange, false);
+                    fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange);
                     fow.ScoutTiles();
                     fow.ScoutEnemies();
                 }

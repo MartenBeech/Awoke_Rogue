@@ -65,11 +65,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void DamageEnemy(int damage, int tile)
     {
-        Rng rng = new Rng();
-        damage = rng.Range(Mathf.FloorToInt(damage * 0.5f), Mathf.FloorToInt(damage * 1.5f) + 1);
         Enemy.enemies[tile].health -= damage;
         UnitStat unitStat = new UnitStat();
-        unitStat.DisplayStats(PlayerMovement.tilePos);
         unitStat.DisplayStats(tile);
         AnimaText animaText = new AnimaText();
         animaText.ShowText(tile, damage.ToString(), Color.red);

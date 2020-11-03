@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour
             if (Tile.type[i] == Tile.Type.End)
             {
                 SummonEnemy(i, enemyList[rng.Range(0, enemyList.Count)]);
+                enemies[i].boss = true;
                 break;
             }
         }
@@ -131,6 +132,12 @@ public class Enemy : MonoBehaviour
             PlayerStat.keyObtained = true;
             AnimaText text = new AnimaText();
             text.ShowText(tile, "Gate Key obtained", Color.cyan);
+        }
+        if (enemies[tile].boss)
+        {
+            PlayerStat.bossKilled = true;
+            AnimaText text = new AnimaText();
+            text.ShowText(tile, "Staircase opened", Color.cyan);
         }
         GameObject.Destroy(GameObject.Find("Enemy" + tile.ToString()));
         enemies[tile] = null;

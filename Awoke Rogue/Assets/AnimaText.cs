@@ -29,7 +29,7 @@ public class AnimaText : MonoBehaviour
             this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.05f);
             counter -= Time.deltaTime;
 
-            if (counter <= 0.5 && !bufDecreased)
+            if (counter <= 0.75 && !bufDecreased)
             {
                 bufDecreased = true;
                 
@@ -64,6 +64,27 @@ public class AnimaText : MonoBehaviour
         prefab = Resources.Load<GameObject>("Assets/FloatingText");
         parent = GameObject.Find("Animation");
         startSet = Tile.Tiles[to];
+        prefab.GetComponentInChildren<Text>().color = textColor;
+        prefab.GetComponentInChildren<Text>().text = text;
+
+        bufPos[bufNmb] = startSet;
+        bufText[bufNmb] = prefab.GetComponentInChildren<Text>().text;
+        bufColor[bufNmb] = prefab.GetComponentInChildren<Text>().color;
+        bufPrefab[bufNmb] = prefab;
+        bufDealer[bufNmb] = dealerSet;
+
+        if (bufNmb == 0)
+        {
+            Instantiate(bufPrefab[0], bufPos[0].transform.position, new Quaternion(0, 0, 0, 0), parent.transform);
+        }
+        bufNmb++;
+    }
+
+    public void ShowTextUI(GameObject to, string text, Color textColor)
+    {
+        prefab = Resources.Load<GameObject>("Assets/FloatingText");
+        parent = GameObject.Find("AnimationUI");
+        startSet = to;
         prefab.GetComponentInChildren<Text>().color = textColor;
         prefab.GetComponentInChildren<Text>().text = text;
 

@@ -9,9 +9,9 @@ public class UnitStat : MonoBehaviour
     {
         if (tile == PlayerMovement.tilePos)
         {
-            PlayerMovement.Player.GetComponentInChildren<Text>().text = "<color=green>" + PlayerStat.health + "/" + PlayerStat.healthMax + "</color>";
-            PlayerMovement.Player.GetComponentInChildren<Text>().alignment = TextAnchor.LowerCenter;
+            PlayerMovement.Player.GetComponentInChildren<Text>().text = PlayerStat.health + "/" + PlayerStat.healthMax;
             UI.HealthBar.GetComponentInChildren<Text>().text = PlayerStat.health + " / " + PlayerStat.healthMax;
+            UI.RageBar.GetComponentInChildren<Text>().text = PlayerStat.rage + " / " + PlayerStat.rageMax;
 
             if (PlayerStat.health > 0)
             {
@@ -21,7 +21,16 @@ public class UnitStat : MonoBehaviour
             {
                 UI.HealthBar.GetComponentInChildren<Image>().fillAmount = 0;
             }
-            
+
+            if (PlayerStat.rage > 0)
+            {
+                UI.RageBar.GetComponentInChildren<Image>().fillAmount = (float)PlayerStat.rage / PlayerStat.rageMax;
+            }
+            else
+            {
+                UI.RageBar.GetComponentInChildren<Image>().fillAmount = 0;
+            }
+
         }
         else if (Enemy.occupied[tile])
         {
@@ -90,6 +99,7 @@ public class UnitStat : MonoBehaviour
         }
         Enemy.enemies[tile].title = title;
 
+        /*
         switch (unit)
         {
             // LEVEL 1
@@ -264,5 +274,6 @@ public class UnitStat : MonoBehaviour
                 Enemy.enemies[tile].type = EnemyUnit.Type.Melee;
                 break;
         }
+        */
     }
 }

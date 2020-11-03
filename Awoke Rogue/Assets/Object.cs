@@ -12,18 +12,17 @@ public class Object : MonoBehaviour
         string name = this.name.Replace("Enemy", "");
         EnemySelected(int.Parse(name));
     }
-
-    public void TileClicked()
-    {
-        string name = EventSystem.current.currentSelectedGameObject.name.Replace("Tile", "");
-        TileSelected(int.Parse(name));
-    }
-
     private void EnemySelected(int i)
     {
         Debug.Log((Enemy.enemies[i].title) + i.ToString() + (FogOfWar.scouted[i] ? " ScoutedTrue" : "ScoutedFalse"));
         PlayerAttack attack = new PlayerAttack();
         attack.UseAbility(i);
+    }
+
+    public void TileClicked()
+    {
+        string name = EventSystem.current.currentSelectedGameObject.name.Replace("Tile", "");
+        TileSelected(int.Parse(name));
     }
 
     private void TileSelected(int i)
@@ -53,6 +52,23 @@ public class Object : MonoBehaviour
 
             UI ui = new UI();
             ui.EndTurn();
+        }
+    }
+
+    public void PlayerClicked()
+    {
+        if (Tile.type[PlayerMovement.tilePos] == Tile.Type.End)
+        {
+            if (PlayerStat.bossKilled)
+            {
+                Level level = new Level();
+                level.WinLevel();
+            }
+            else
+            {
+                AnimaText text = new AnimaText();
+                text.ShowText(PlayerMovement.tilePos, "Boss still alive", Color.red);
+            }
         }
     }
 }

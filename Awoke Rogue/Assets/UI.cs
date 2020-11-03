@@ -8,12 +8,14 @@ public class UI : MonoBehaviour
     public static GameObject TurnEnd;
     public static GameObject Description;
     public static GameObject HealthBar;
+    public static GameObject RageBar;
 
     private void Start()
     {
         TurnEnd = GameObject.Find("TurnEnd");
         Description = GameObject.Find("Description");
         HealthBar = GameObject.Find("HealthBar");
+        RageBar = GameObject.Find("RageBar");
     }
 
     public void EndTurn()

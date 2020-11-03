@@ -10,12 +10,9 @@ public class DungeonGenerator : MonoBehaviour
     {
         FillWithWalls();
 
-        AddRoomSection(20, 1);
+        AddRoomSection(2, 1);
 
         AddStartAndExit();
-
-        UnitStat unitStat = new UnitStat();
-        unitStat.DisplayStats(PlayerMovement.tilePos);
 
         Enemy enemy = new Enemy();
         enemy.SummonBoss();

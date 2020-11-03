@@ -10,12 +10,12 @@ public class EnemyUnit : MonoBehaviour
     public int tilePos;
 
     public string title;
-    public int health = 20;
+    public int health = 100;
     public int range = 1;
     public int damage = 4;
     public int cooldown = 1;
     public enum Type { Melee, Ranged, Magical };
-    public Type type;
+    public Type type = Type.Melee;
 
     public bool preparing;
     public int cantAttack;
@@ -106,11 +106,9 @@ public class EnemyUnit : MonoBehaviour
     {
         Rng rng = new Rng();
         damage = rng.Range(Mathf.FloorToInt(damage * 0.5f), Mathf.FloorToInt(damage * 1.5f) + 1);
-        PlayerStat.health -= damage;
+        PlayerStat playerStat = new PlayerStat();
+        playerStat.TakeDamage(damage);
         UnitStat unitStat = new UnitStat();
-        unitStat.DisplayStats(PlayerMovement.tilePos);
         unitStat.DisplayStats(tile);
-        AnimaText animaText = new AnimaText();
-        animaText.ShowText(PlayerMovement.tilePos, damage.ToString(), Color.red);
     }
 }

@@ -9,13 +9,16 @@ public class UnitStat : MonoBehaviour
     {
         if (tile == PlayerMovement.tilePos)
         {
-            PlayerMovement.Player.GetComponentInChildren<Text>().text = PlayerStat.health + "/" + PlayerStat.healthMax;
-            UI.HealthBar.GetComponentInChildren<Text>().text = PlayerStat.health + " / " + PlayerStat.healthMax;
-            UI.RageBar.GetComponentInChildren<Text>().text = PlayerStat.rage + " / " + PlayerStat.rageMax;
+            PlayerMovement.Player.GetComponentInChildren<Text>().text = "<color=red>" + PlayerStat.rage + "</color>" + "  " + "<color=green>" + PlayerStat.health + "</color>";
+
+            UI.HealthBar.GetComponentInChildren<Text>().text = PlayerStat.health + "            \n            " + PlayerStat.healthMax;
+            UI.RageBar.GetComponentInChildren<Text>().text = PlayerStat.rage + "            \n            " + PlayerStat.rageMax;
 
             if (PlayerStat.health > 0)
             {
-                UI.HealthBar.GetComponentInChildren<Image>().fillAmount = (float)PlayerStat.health / PlayerStat.healthMax;
+                float healthRatio = (float)PlayerStat.health / PlayerStat.healthMax;
+                UI.HealthBar.GetComponentInChildren<Image>().fillAmount = healthRatio;
+                UI.HealthBar.GetComponentInChildren<Image>().color = Color.HSVToRGB((healthRatio * 100) / 360f, 1 - healthRatio, 1f);
             }
             else
             {
@@ -34,7 +37,7 @@ public class UnitStat : MonoBehaviour
         }
         else if (Enemy.occupied[tile])
         {
-            GameObject.Find("Enemy" + tile).GetComponentInChildren<Text>().text = "<color=red>" + Enemy.enemies[tile].damage + "</color>" + "   " + "<color=green>" + Enemy.enemies[tile].health + "</color>";
+            GameObject.Find("Enemy" + tile).GetComponentInChildren<Text>().text = "<color=red>" + Enemy.enemies[tile].damage + "</color>" + "  " + "<color=green>" + Enemy.enemies[tile].health + "</color>";
             GameObject.Find("Enemy" + tile).GetComponentInChildren<Text>().alignment = TextAnchor.LowerCenter;
         }
     }

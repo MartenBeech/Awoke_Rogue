@@ -7,7 +7,7 @@ public class PlayerStat : MonoBehaviour
 {
     public static int scoutRange = 5;
     public static int stealthRange = 5;
-    public static int healthMax = 50;
+    public static int healthMax = 100;
     public static int health = healthMax;
     public static int rageMax = 100;
     public static int rage = rageMax;

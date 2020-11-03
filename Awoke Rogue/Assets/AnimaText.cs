@@ -5,34 +5,35 @@ using UnityEngine.UI;
 
 public class AnimaText : MonoBehaviour
 {
+    const int SIZE = 10;
     public GameObject prefab;
     private GameObject startSet;
     public static GameObject parent;
     private static int dealerSet;
     private float counter = 1f;
     public static int bufNmb = 0;
-    private static GameObject[] bufPrefab = new GameObject[50];
-    private static GameObject[] bufPos = new GameObject[50];
-    private static string[] bufText = new string[50];
-    private static Color[] bufColor = new Color[50];
-    private static int[] bufDealer = new int[50];
+    private static GameObject[] bufPrefab = new GameObject[SIZE];
+    private static GameObject[] bufPos = new GameObject[SIZE];
+    private static string[] bufText = new string[SIZE];
+    private static Color[] bufColor = new Color[SIZE];
+    private static int[] bufDealer = new int[SIZE];
     private bool bufDecreased = false;
 
     private void Awake()
     {
-        this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y);
+        transform.position = new Vector3(transform.position.x, transform.position.y);
     }
     void Update()
     {
         if (counter > 0)
         {
-            this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.05f);
+            transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f);
             counter -= Time.deltaTime;
 
             if (counter <= 0.75 && !bufDecreased)
             {
                 bufDecreased = true;
-                
+
                 for (int i = 0; i < bufNmb; i++)
                 {
                     bufPrefab[i] = bufPrefab[i + 1];
@@ -67,37 +68,20 @@ public class AnimaText : MonoBehaviour
         prefab.GetComponentInChildren<Text>().color = textColor;
         prefab.GetComponentInChildren<Text>().text = text;
 
-        bufPos[bufNmb] = startSet;
-        bufText[bufNmb] = prefab.GetComponentInChildren<Text>().text;
-        bufColor[bufNmb] = prefab.GetComponentInChildren<Text>().color;
-        bufPrefab[bufNmb] = prefab;
-        bufDealer[bufNmb] = dealerSet;
+        if (bufNmb < SIZE - 1)
+        {
+            bufPos[bufNmb] = startSet;
+            bufText[bufNmb] = prefab.GetComponentInChildren<Text>().text;
+            bufColor[bufNmb] = prefab.GetComponentInChildren<Text>().color;
+            bufPrefab[bufNmb] = prefab;
+            bufDealer[bufNmb] = dealerSet;
+            bufNmb++;
+        }
 
-        if (bufNmb == 0)
+        if (bufNmb == 1)
         {
             Instantiate(bufPrefab[0], bufPos[0].transform.position, new Quaternion(0, 0, 0, 0), parent.transform);
         }
-        bufNmb++;
-    }
-
-    public void ShowTextUI(GameObject to, string text, Color textColor)
-    {
-        prefab = Resources.Load<GameObject>("Assets/FloatingText");
-        parent = GameObject.Find("AnimationUI");
-        startSet = to;
-        prefab.GetComponentInChildren<Text>().color = textColor;
-        prefab.GetComponentInChildren<Text>().text = text;
-
-        bufPos[bufNmb] = startSet;
-        bufText[bufNmb] = prefab.GetComponentInChildren<Text>().text;
-        bufColor[bufNmb] = prefab.GetComponentInChildren<Text>().color;
-        bufPrefab[bufNmb] = prefab;
-        bufDealer[bufNmb] = dealerSet;
-
-        if (bufNmb == 0)
-        {
-            Instantiate(bufPrefab[0], bufPos[0].transform.position, new Quaternion(0, 0, 0, 0), parent.transform);
-        }
-        bufNmb++;
+        
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AnimaText : MonoBehaviour
 {
-    const int SIZE = 10;
+    const int SIZE = 50;
     public GameObject prefab;
     private GameObject startSet;
     public static GameObject parent;

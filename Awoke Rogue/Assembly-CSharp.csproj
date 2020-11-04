@@ -57,11 +57,13 @@
   <ItemGroup>
     <Compile Include="Assets\UnitStat.cs" />
     <Compile Include="Assets\Enemy.cs" />
+    <Compile Include="Assets\Level.cs" />
     <Compile Include="Assets\Menu.cs" />
     <Compile Include="Assets\DungeonGenerator.cs" />
+    <Compile Include="Assets\Map.cs" />
     <Compile Include="Assets\PlayerStat.cs" />
     <Compile Include="Assets\Rng.cs" />
-    <Compile Include="Assets\CameraFollow.cs" />
+    <Compile Include="Assets\Camera.cs" />
     <Compile Include="Assets\Object.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Turn.cs" />
@@ -74,8 +76,8 @@
     <Compile Include="Assets\PlayerAttack.cs" />
     <Compile Include="Assets\AnimaUnit.cs" />
     <Compile Include="Assets\AnimaText.cs" />
-    <Compile Include="Assets\Level.cs" />
-    <Compile Include="Assets\Map.cs" />
+    <Compile Include="Assets\Shop.cs" />
+    <Compile Include="Assets\CameraFollow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -5,16 +5,12 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
-    public static GameObject Cam;
-    public static GameObject Board;
     public static GameObject Info;
 
     public static int level = 0;
 
     private void Start()
     {
-        Cam = GameObject.Find("Main Camera");
-        Board = GameObject.Find("CanvasDungeon");
         Info = GameObject.Find("StartGame");
     }
 
@@ -30,7 +26,7 @@ public class Level : MonoBehaviour
                 enemy.Destroy(i);
             }
         }
-        Cam.transform.position = new Vector3(Board.transform.position.x, Board.transform.position.y, -10);
+        Camera.Cam.GetComponentInChildren<CameraFollow>().enabled = true;
         DungeonGenerator dungeon = new DungeonGenerator();
         dungeon.GenerateDungeon();
 
@@ -55,6 +51,7 @@ public class Level : MonoBehaviour
 
     public void WinLevel()
     {
-        NewLevel();
+        Shop shop = new Shop();
+        
     }
 }

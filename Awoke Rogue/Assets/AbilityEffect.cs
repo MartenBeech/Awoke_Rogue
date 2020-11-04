@@ -13,11 +13,11 @@ public class AbilityEffect : MonoBehaviour
         switch (PlayerAttack.title[i])
         {
             case "Crossbow":
-                //if (stat.ConsumeRage())
-                //{
-                //    attack.DamageEnemy(PlayerAttack.power[i] * 3, tile);
-                //}
-                //else
+                if (stat.ConsumeRage())
+                {
+                    attack.DamageEnemy(PlayerAttack.power[i] * 3, tile);
+                }
+                else
                 {
                     attack.DamageEnemy(rng.GetPlusMinus50PerCent(PlayerAttack.power[i]), tile);
                     stat.GainRage(rng.Range(10, 21));

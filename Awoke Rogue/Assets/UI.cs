@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     public static GameObject Description;
     public static GameObject HealthBar;
     public static GameObject RageBar;
+    public static GameObject EndBtn;
 
     private void Start()
     {
@@ -16,6 +17,21 @@ public class UI : MonoBehaviour
         Description = GameObject.Find("Description");
         HealthBar = GameObject.Find("HealthBar");
         RageBar = GameObject.Find("RageBar");
+        EndBtn = GameObject.Find("EndBtn");
+
+    }
+
+    public void EndBtnClicked()
+    {
+        if (EndBtn.GetComponentInChildren<Text>().text == "End Turn")
+        {
+            EndTurn();
+        }
+        else if (EndBtn.GetComponentInChildren<Text>().text == "Enter Next Dungeon")
+        {
+            Level level = new Level();
+            level.NewLevel();
+        }
     }
 
     public void EndTurn()

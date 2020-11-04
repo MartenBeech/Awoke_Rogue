@@ -59,6 +59,12 @@ public class PlayerAttack : MonoBehaviour
 
                 UI ui = new UI();
                 ui.EndTurn();
+
+                if (PlayerStat.rage > 0)
+                {
+                    PlayerStat playerStat = new PlayerStat();
+                    playerStat.GainRage(1);
+                }
             }
         }
     }

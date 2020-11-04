@@ -76,6 +76,9 @@ public class PlayerMovement : MonoBehaviour
         Tile.passable[from] = true;
         Tile.passable[to] = false;
 
+        PlayerStat playerStat = new PlayerStat();
+        playerStat.GainRage(-1);
+
         Turn.currentTurn = Turn.CurrentTurn.PlayerNeutral;
     }
 }

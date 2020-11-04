@@ -60,7 +60,12 @@ public class PlayerStat : MonoBehaviour
         {
             amount = rageMax - rage;
         }
-        if (amount > 0)
+        else if (amount < -rage)
+        {
+            amount = -rage;
+        }
+
+        if (amount != 0)
         {
             rage += amount;
         }

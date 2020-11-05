@@ -30,7 +30,7 @@ public class FogOfWar : MonoBehaviour
 
     public void ScoutPath(int center, int range)
     {
-
+        Map map = new Map();
         int tile, sideTile;
 
         for (int i = 1; i <= range; i++)                    //EAST
@@ -39,17 +39,37 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
-                if (i != range)
+                Map.scouted[tile] = true;
+                for (int j = 0; j <= (range / 2) - 1; j++)
                 {
-                    sideTile = GetAvailableTile(i, 1, center);
-                    if (sideTile < 1600)
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(i, j, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
-                    sideTile = GetAvailableTile(i, -1, center);
-                    if (sideTile < 1600)
+                }
+                for (int j = 0; j >= (-range / 2) + 1; j--)
+                {
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(i, j, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
                 if (!Tile.passable[tile])
@@ -69,17 +89,37 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
-                if (i != range)
+                Map.scouted[tile] = true;
+                for (int j = 0; j <= (range / 2) - 1; j++)
                 {
-                    sideTile = GetAvailableTile(-i, 1, center);
-                    if (sideTile < 1600)
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(-i, j, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
-                    sideTile = GetAvailableTile(-i, -1, center);
-                    if (sideTile < 1600)
+                }
+                for (int j = 0; j >= (-range / 2) + 1; j--)
+                {
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(-i, j, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
                 if (!Tile.passable[tile])
@@ -99,17 +139,37 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
-                if (i != range)
+                Map.scouted[tile] = true;
+                for (int j = 0; j <= (range / 2) - 1; j++)
                 {
-                    sideTile = GetAvailableTile(1, i, center);
-                    if (sideTile < 1600)
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(j, i, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
-                    sideTile = GetAvailableTile(-1, i, center);
-                    if (sideTile < 1600)
+                }
+                for (int j = 0; j >= (-range / 2) + 1; j--)
+                {
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(j, i, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
                 if (!Tile.passable[tile])
@@ -129,17 +189,37 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
-                if (i != range)
+                Map.scouted[tile] = true;
+                for (int j = 0; j <= (range / 2) - 1; j++)
                 {
-                    sideTile = GetAvailableTile(1, -i, center);
-                    if (sideTile < 1600)
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(j, -i, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
-                    sideTile = GetAvailableTile(-1, -i, center);
-                    if (sideTile < 1600)
+                }
+                for (int j = 0; j >= (-range / 2) + 1; j--)
+                {
+                    if (i + Mathf.Abs(j) <= range && i != 0)
                     {
-                        scouted[sideTile] = true;
+                        sideTile = GetAvailableTile(j, -i, center);
+                        if (sideTile < 1600)
+                        {
+                            scouted[sideTile] = true;
+                            Map.scouted[sideTile] = true;
+                            if (!Tile.passable[sideTile])
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
                 if (!Tile.passable[tile])
@@ -159,29 +239,35 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
+                Map.scouted[tile] = true;
                 if (Tile.passable[tile])
                 {
-                    tile = GetAvailableTile(i, i + 1, center);
-                    if (tile < 1600)
+                    if (i * 2 < range)
                     {
-                        sideTile = GetAvailableTile(i - 1, i, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(i, i + 1, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(i - 1, i, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
-                    }
-                    tile = GetAvailableTile(i + 1, i, center);
-                    if (tile < 1600)
-                    {
-                        sideTile = GetAvailableTile(i, i - 1, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(i + 1, i, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(i, i - 1, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
                     }
@@ -203,29 +289,35 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
+                Map.scouted[tile] = true;
                 if (Tile.passable[tile])
                 {
-                    tile = GetAvailableTile(i, -i - 1, center);
-                    if (tile < 1600)
+                    if (i * 2 < range)
                     {
-                        sideTile = GetAvailableTile(i - 1, -i, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(i, -i - 1, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(i - 1, -i, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
-                    }
-                    tile = GetAvailableTile(i + 1, -i, center);
-                    if (tile < 1600)
-                    {
-                        sideTile = GetAvailableTile(i, -i + 1, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(i + 1, -i, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(i, -i + 1, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
                     }
@@ -247,29 +339,35 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
+                Map.scouted[tile] = true;
                 if (Tile.passable[tile])
                 {
-                    tile = GetAvailableTile(-i, i + 1, center);
-                    if (tile < 1600)
+                    if (i * 2 < range)
                     {
-                        sideTile = GetAvailableTile(-i + 1, i, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(-i, i + 1, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(-i + 1, i, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
-                    }
-                    tile = GetAvailableTile(-i - 1, i, center);
-                    if (tile < 1600)
-                    {
-                        sideTile = GetAvailableTile(-i, i - 1, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(-i - 1, i, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(-i, i - 1, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
                     }
@@ -291,29 +389,35 @@ public class FogOfWar : MonoBehaviour
             if (tile < 1600)
             {
                 scouted[tile] = true;
+                Map.scouted[tile] = true;
                 if (Tile.passable[tile])
                 {
-                    tile = GetAvailableTile(-i, -i - 1, center);
-                    if (tile < 1600)
+                    if (i * 2 < range)
                     {
-                        sideTile = GetAvailableTile(-i + 1, -i, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(-i, -i - 1, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(-i + 1, -i, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
-                    }
-                    tile = GetAvailableTile(-i - 1, -i, center);
-                    if (tile < 1600)
-                    {
-                        sideTile = GetAvailableTile(-i, -i + 1, center);
-                        if (sideTile < 1600)
+                        tile = GetAvailableTile(-i - 1, -i, center);
+                        if (tile < 1600)
                         {
-                            if (Tile.passable[sideTile])
+                            sideTile = GetAvailableTile(-i, -i + 1, center);
+                            if (sideTile < 1600)
                             {
-                                scouted[tile] = true;
+                                if (Tile.passable[sideTile])
+                                {
+                                    scouted[tile] = true;
+                                    Map.scouted[tile] = true;
+                                }
                             }
                         }
                     }
@@ -333,6 +437,7 @@ public class FogOfWar : MonoBehaviour
     public void ScoutTiles()
     {
         scouted[PlayerMovement.tilePos] = true;
+        Map.scouted[PlayerMovement.tilePos] = true;
         for (int i = 0; i < Tile.SIZE; i++)
         {
             if (!scouted[i])
@@ -345,7 +450,7 @@ public class FogOfWar : MonoBehaviour
             }
         }
         Map map = new Map();
-        map.ScoutMap(PlayerMovement.tilePos, 5);
+        //map.ScoutMap(PlayerMovement.tilePos, 5);
     }
 
     public void ScoutEnemies()

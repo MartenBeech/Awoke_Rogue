@@ -37,6 +37,9 @@ public class AnimaUnit : MonoBehaviour
                     fow.ScoutPath(PlayerMovement.tilePos, PlayerStat.scoutRange);
                     fow.ScoutTiles();
                     fow.ScoutEnemies();
+
+                    Map map = new Map();
+                    map.UpdateMap();
                 }
                 else if (Turn.currentTurn == Turn.CurrentTurn.EnemyNeutral)
                 {

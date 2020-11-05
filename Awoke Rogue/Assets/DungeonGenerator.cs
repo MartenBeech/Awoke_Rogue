@@ -21,10 +21,11 @@ public class DungeonGenerator : MonoBehaviour
 
     private void FillWithWalls()
     {
-        for (int i = 0; i < Tile.Tiles.Length; i++)
+        Tile tile = new Tile();
+        for (int i = 0; i < Tile.SIZE; i++)
         {
-            Tile tile = new Tile();
             tile.AddWall(i);
+            Tile.Tiles[i].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("FogOfWar/Unscouted");
         }
     }
 

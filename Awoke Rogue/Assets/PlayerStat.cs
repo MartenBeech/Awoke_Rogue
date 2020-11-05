@@ -10,7 +10,7 @@ public class PlayerStat : MonoBehaviour
     public static int healthMax = 100;
     public static int health = healthMax;
     public static int rageMax = 100;
-    public static int rage = rageMax;
+    public static int rage = 0;
     public static int rageConsume = 50;
 
     public static bool keyObtained;

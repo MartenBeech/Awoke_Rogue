@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AnimaText : MonoBehaviour
 {
-    const int SIZE = 50;
+    const int SIZE = 25;
     public GameObject prefab;
     private GameObject startSet;
     public static GameObject parent;
@@ -30,7 +30,7 @@ public class AnimaText : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f);
             counter -= Time.deltaTime;
 
-            if (counter <= 0.75 && !bufDecreased)
+            if (counter <= 0.75 + ((float)bufNmb/100) && !bufDecreased)
             {
                 bufDecreased = true;
 

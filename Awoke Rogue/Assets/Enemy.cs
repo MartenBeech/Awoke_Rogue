@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
         UnitStat unitStat = new UnitStat();
         enemyList = unitStat.GetUnitLevels(1);
-        int keyCarrier = rng.Range(0, amount);
+        int keyKeeper = rng.Range(0, amount);
 
         for (int i = 0; i < amount; i++)
         {
@@ -25,12 +25,12 @@ public class Enemy : MonoBehaviour
             {
                 rnd = rng.Range(0, 1600);
             }
-            while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd] || occupied[rnd]);
+            while (Tile.type[rnd] != Tile.Type.DungeonFloor || !Tile.passable[rnd]);
 
             SummonEnemy(rnd, enemyList[rng.Range(0, enemyList.Count)]);
-            if (i == keyCarrier)
+            if (i == keyKeeper)
             {
-                enemies[rnd].keyCarrier = true;
+                enemies[rnd].keyKeeper = true;
             }
         }
     }
@@ -40,11 +40,17 @@ public class Enemy : MonoBehaviour
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
         UnitStat unitStat = new UnitStat();
         enemyList = unitStat.GetUnitLevels(2);
+        int artifactKeeper = rng.Range(0, amount);
 
         for (int i = 0; i < amount; i++)
         {
             int rnd = rng.Range(0, tiles.Count);
             SummonEnemy(tiles[rnd], enemyList[rng.Range(0, enemyList.Count)]);
+            if (i == artifactKeeper)
+            {
+                enemies[tiles[rnd]].artifactKeeper = true;
+            }
+
             tiles.RemoveAt(rnd);
         }
     }
@@ -83,6 +89,7 @@ public class Enemy : MonoBehaviour
         prefab.name = "Enemy" + tile.ToString();
 
         occupied[tile] = true;
+        Tile.passable[tile] = false;
         unitStat.DisplayStats(tile);
         prefab.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Enemies/" + enemies[tile].title);
         MoveEnemy(prefab, tile, tile);
@@ -109,7 +116,7 @@ public class Enemy : MonoBehaviour
             enemies[to].cantMove = enemies[from].cantMove;
 
             enemies[to].boss = enemies[from].boss;
-            enemies[to].keyCarrier = enemies[from].keyCarrier;
+            enemies[to].keyKeeper = enemies[from].keyKeeper;
 
 
             GameObject.Find("Enemy" + from.ToString()).name = "Enemy" + to.ToString();
@@ -127,7 +134,7 @@ public class Enemy : MonoBehaviour
 
     public void Destroy(int tile)
     {
-        if (enemies[tile].keyCarrier)
+        if (enemies[tile].keyKeeper)
         {
             PlayerStat.keyObtained = true;
             AnimaText text = new AnimaText();

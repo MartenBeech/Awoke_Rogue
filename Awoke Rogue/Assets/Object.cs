@@ -42,10 +42,10 @@ public class Object : MonoBehaviour
     {
         if (Tile.type[i] == Tile.Type.TreasureGateClosed)
         {
-            Tile.type[i] = Tile.Type.TreasureGateOpen;
             gateOpened = true;
-            Tile.Tiles[i].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Objects/GateOpen");
-            Tile.passable[i] = true;
+
+            Tile tile = new Tile();
+            tile.AddGateOpen(i);
 
             AnimaText text = new AnimaText();
             text.ShowText(i, "Gate Opened", Color.cyan);

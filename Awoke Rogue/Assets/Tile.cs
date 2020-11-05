@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour
     public const int SIZE = 1600;
     Rng rng = new Rng();
     public static GameObject[] Tiles = new GameObject[SIZE];
+    public static Sprite[] images = new Sprite[SIZE];
 
     public enum Type 
     {
@@ -38,12 +39,12 @@ public class Tile : MonoBehaviour
         if (_Type == Type.Dungeon)
         {
             type[tile] = Type.DungeonWall;
-            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/WallDungeon");
+            images[tile] = Resources.Load<Sprite>("Walls/WallDungeon");
         }
         else if (_Type == Type.Treasure)
         {
             type[tile] = Type.TreasureWall;
-            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Walls/WallTreasure");
+            images[tile] = Resources.Load<Sprite>("Walls/WallTreasure");
         }
         passable[tile] = false;
     }
@@ -52,13 +53,14 @@ public class Tile : MonoBehaviour
     {
         if (_Type == Type.Dungeon)
         {
-            type[tile] = Type.DungeonFloor; Rng rng = new Rng();
-            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Floors/FloorDungeon (" + rng.Range(0, 16) + ")");
+            type[tile] = Type.DungeonFloor; 
+            Rng rng = new Rng();
+            images[tile] = Resources.Load<Sprite>("Floors/FloorDungeon (" + rng.Range(0, 16) + ")");
         }
         else if (_Type == Type.Treasure)
         {
             type[tile] = Type.TreasureFloor;
-            Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Floors/FloorTreasure (" + i + ")");
+            images[tile] = Resources.Load<Sprite>("Floors/FloorTreasure (" + i + ")");
         }
         passable[tile] = true;
     }
@@ -66,7 +68,7 @@ public class Tile : MonoBehaviour
     public void AddStart(int tile)
     {
         type[tile] = Type.Start;
-        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Start");
+        images[tile] = Resources.Load<Sprite>("Stairs/Start");
         PlayerMovement.tilePos = tile;
         PlayerMovement.xPos = tile % 40;
         PlayerMovement.yPos = tile / 40;
@@ -76,7 +78,7 @@ public class Tile : MonoBehaviour
     public void AddExit(int tile)
     {
         type[tile] = Type.End;
-        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Stairs/Exit");
+        images[tile] = Resources.Load<Sprite>("Stairs/Exit");
         passable[tile] = true;
     }
 
@@ -84,14 +86,14 @@ public class Tile : MonoBehaviour
     {
         Rng rng = new Rng();
         type[tile] = Type.TreasureGateClosed;
-        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Objects/Gate" + rng.Range(0, 3));
+        images[tile] = Resources.Load<Sprite>("Objects/Gate" + rng.Range(0, 3));
         passable[tile] = false;
     }
 
     public void AddGateOpen(int tile)
     {
         type[tile] = Type.TreasureGateOpen;
-        Tiles[tile].GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Objects/GateOpen");
+        images[tile] = Resources.Load<Sprite>("Objects/GateOpen");
         passable[tile] = true;
     }
 

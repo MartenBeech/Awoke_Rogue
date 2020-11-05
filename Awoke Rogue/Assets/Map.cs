@@ -7,6 +7,7 @@ public class Map : MonoBehaviour
 {
 
     public static GameObject[] Maps = new GameObject[Tile.SIZE];
+    public static bool[] scouted = new bool[1600];
 
     private void Start()
     {
@@ -20,23 +21,14 @@ public class Map : MonoBehaviour
         }
     }
 
-    public void ScoutMap(int center, int range)
+    public void UpdateMap()
     {
-        int xPos = center % 40;
-        int yPos = center / 40;
-
-        for (int x = xPos - range; x <= xPos + range; x++)
+        for (int i = 0; i < Tile.SIZE; i++)
         {
-            if (x >= 0 && x < 40)
+            if (scouted[i])
             {
-                for (int y = yPos - range; y <= yPos + range; y++)
-                {
-                    if (y >= 0 && y < 40)
-                    {
-                        ScoutTile(x + (y * 40));
-                    }
-                }
-            } 
+                ScoutTile(i);
+            }
         }
     }
 
@@ -45,11 +37,14 @@ public class Map : MonoBehaviour
         for (int i = 0; i < Tile.SIZE; i++)
         {
             Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(0 / 360f, 0f, 0.5f); //Gray
+            scouted[i] = false;
         }
     }
 
     public void ScoutTile(int i)
     {
+        Tile.Tiles[i].GetComponentInChildren<Image>().sprite = Tile.images[i];
+
         if (i == PlayerMovement.tilePos)
         {
             Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(120 / 360f, 1f, 1f); //Green
@@ -64,7 +59,6 @@ public class Map : MonoBehaviour
             switch (Tile.type[i])
             {
                 case Tile.Type.DungeonWall:
-                case Tile.Type.TreasureWall:
                     Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(0 / 360f, 1f, 0f); //Black
                     break;
 
@@ -72,8 +66,14 @@ public class Map : MonoBehaviour
                     Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(240 / 360f, 1f, 1f); //DarkBlue
                     break;
 
-                case Tile.Type.TreasureFloor:
+                case Tile.Type.TreasureWall:
                     Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(45 / 360f, 1f, 1f); //YellowOrange
+                    break;
+
+                case Tile.Type.TreasureFloor:
+                case Tile.Type.TreasureGateClosed:
+                case Tile.Type.TreasureGateOpen:
+                    Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(45 / 360f, 0.6f, 0.6f); //DarkYellowOrange
                     break;
 
                 case Tile.Type.Start:
@@ -82,11 +82,6 @@ public class Map : MonoBehaviour
 
                 case Tile.Type.End:
                     Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(180 / 360f, 1f, 0.5f); //DarkCyan
-                    break;
-
-                case Tile.Type.TreasureGateClosed:
-                case Tile.Type.TreasureGateOpen:
-                    Maps[i].GetComponentInChildren<Image>().color = Color.HSVToRGB(270 / 360f, 1f, 1f); //Purple
                     break;
             }
         }

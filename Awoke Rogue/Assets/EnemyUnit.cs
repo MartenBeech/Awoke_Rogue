@@ -10,7 +10,7 @@ public class EnemyUnit : MonoBehaviour
     public int tilePos;
 
     public string title;
-    public int health = 100;
+    public int health = 20;
     public int range = 1;
     public int damage = 4;
     public int cooldown = 1;
@@ -22,7 +22,8 @@ public class EnemyUnit : MonoBehaviour
     public int cantMove;
 
     public bool boss;
-    public bool keyCarrier;
+    public bool keyKeeper;
+    public bool artifactKeeper;
 
     public void MoveAction(int tile)
     {
@@ -87,8 +88,6 @@ public class EnemyUnit : MonoBehaviour
     public void PrepareAction(int tile)
     {
         Enemy.enemies[tile].preparing = true;
-        //AnimaText animaText = new AnimaText();
-        //animaText.ShowText(tile, "Prepare", Color.red);
         GameObject.Find("Enemy" + tile).GetComponentInChildren<Image>().color = Color.red;
     }
 

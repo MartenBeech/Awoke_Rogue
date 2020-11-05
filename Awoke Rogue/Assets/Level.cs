@@ -26,9 +26,22 @@ public class Level : MonoBehaviour
                 enemy.Destroy(i);
             }
         }
-        Camera.Cam.GetComponentInChildren<CameraFollow>().enabled = true;
+        CameraMain.Cam.GetComponentInChildren<CameraFollow>().enabled = true;
+        if (PlayerStat.scoutRange >= 5)
+        {
+            CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize = (PlayerStat.scoutRange * 10) + 5;
+        }
+        else
+        {
+            CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize = 50;
+        }
+        
+
         DungeonGenerator dungeon = new DungeonGenerator();
         dungeon.GenerateDungeon();
+
+        Map map = new Map();
+        map.HideMap();
 
         PlayerMovement playerMovement = new PlayerMovement();
         playerMovement.MovePlayer(PlayerMovement.tilePos, PlayerMovement.tilePos);
@@ -38,9 +51,7 @@ public class Level : MonoBehaviour
         fow.ScoutTiles();
         fow.ScoutEnemies();
 
-        Map map = new Map();
-        map.HideMap();
-        map.ScoutMap(PlayerMovement.tilePos, 40);
+        map.UpdateMap();
 
         Turn turn = new Turn();
         turn.PlayerTurn();
@@ -51,7 +62,8 @@ public class Level : MonoBehaviour
 
     public void WinLevel()
     {
+        PlayerStat playerStat = new PlayerStat();
+        playerStat.ResetStats();
         Shop shop = new Shop();
-        
     }
 }

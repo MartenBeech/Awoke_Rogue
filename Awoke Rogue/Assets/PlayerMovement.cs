@@ -79,6 +79,19 @@ public class PlayerMovement : MonoBehaviour
         PlayerStat playerStat = new PlayerStat();
         playerStat.GainRage(-1);
 
+        if (Artifact.titles[to] != Artifact.Title.None)
+        {
+            Artifact.Title title = Artifact.titles[to];
+
+            Artifact artifact = new Artifact();
+            artifact.Destroy(to);
+
+            AbilityEffect ability = new AbilityEffect();
+            ability.GainArtifact(title);
+
+            
+        }
+
         Turn.currentTurn = Turn.CurrentTurn.PlayerNeutral;
     }
 }

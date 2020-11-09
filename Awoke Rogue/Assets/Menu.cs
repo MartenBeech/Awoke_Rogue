@@ -13,6 +13,6 @@ public class Menu : MonoBehaviour
         
 
         AbilityEffect ability = new AbilityEffect();
-        ability.GainAbility("Crossbow");
+        ability.GainArtifact(Artifact.Title.Crossbow);
     }
 }

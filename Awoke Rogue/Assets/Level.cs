@@ -19,11 +19,16 @@ public class Level : MonoBehaviour
         level++;
 
         Enemy enemy = new Enemy();
+        Artifact artifact = new Artifact();
         for (int i = 0; i < Tile.SIZE; i++)
         {
             if (Enemy.occupied[i])
             {
                 enemy.Destroy(i);
+            }
+            if (Artifact.titles[i] != Artifact.Title.None)
+            {
+                artifact.Destroy(i);
             }
         }
         CameraMain.Cam.GetComponentInChildren<CameraFollow>().enabled = true;
@@ -39,6 +44,7 @@ public class Level : MonoBehaviour
 
         DungeonGenerator dungeon = new DungeonGenerator();
         dungeon.GenerateDungeon();
+        UI.EndBtn.GetComponentInChildren<Text>().text = "End Turn";
 
         Map map = new Map();
         map.HideMap();

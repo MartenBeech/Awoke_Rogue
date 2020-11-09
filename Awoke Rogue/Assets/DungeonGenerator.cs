@@ -10,7 +10,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         FillWithWalls();
 
-        AddRoomSection(2, 1);
+        AddRoomSection(1, 1);
 
         AddStartAndExit();
 

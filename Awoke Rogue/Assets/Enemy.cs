@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    const int SIZE = Tile.SIZE;
     Rng rng = new Rng();
     public static bool enemyTurn = false;
-    public static EnemyUnit[] enemies = new EnemyUnit[SIZE];
-    public static bool[] occupied = new bool[SIZE];
+    public static EnemyUnit[] enemies = new EnemyUnit[Tile.SIZE];
+    public static bool[] occupied = new bool[Tile.SIZE];
 
     public void SummonNormalEnemies(int amount)
     {
@@ -117,6 +116,7 @@ public class Enemy : MonoBehaviour
 
             enemies[to].boss = enemies[from].boss;
             enemies[to].keyKeeper = enemies[from].keyKeeper;
+            enemies[to].artifactKeeper = enemies[from].artifactKeeper;
 
 
             GameObject.Find("Enemy" + from.ToString()).name = "Enemy" + to.ToString();
@@ -139,6 +139,13 @@ public class Enemy : MonoBehaviour
             PlayerStat.keyObtained = true;
             AnimaText text = new AnimaText();
             text.ShowText(tile, "Gate Key obtained", Color.cyan);
+        }
+        if (enemies[tile].artifactKeeper)
+        {
+            Artifact artifact = new Artifact();
+            artifact.DropRandomArtifact(tile);
+            AnimaText text = new AnimaText();
+            text.ShowText(tile, "Artifact Dropped", Color.cyan);
         }
         if (enemies[tile].boss)
         {

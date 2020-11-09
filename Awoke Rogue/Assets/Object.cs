@@ -19,6 +19,17 @@ public class Object : MonoBehaviour
         attack.UseAbility(i);
     }
 
+    //public void ArtifactClicked()
+    //{
+    //    ArtifactSelected(this.name);
+    //}
+
+    //private void ArtifactSelected(string name)
+    //{
+    //    Artifact.Title parsedEnum = (Artifact.Title)System.Enum.Parse(typeof(Artifact.Title), name);
+    //    Debug.Log(parsedEnum);
+    //}
+
     public void TileClicked()
     {
         string name = EventSystem.current.currentSelectedGameObject.name.Replace("Tile", "");

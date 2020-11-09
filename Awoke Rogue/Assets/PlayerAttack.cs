@@ -8,14 +8,15 @@ public class PlayerAttack : MonoBehaviour
     public const int SIZE = 6;
     public static GameObject[] Abilities = new GameObject[SIZE];
     public static int abilitySelected = SIZE;
-    public static string[] title = new string[SIZE];
+    public static Artifact.Title[] title = new Artifact.Title[SIZE];
     public static string[] description = new string[SIZE];
     public static bool[] occupied = new bool[SIZE];
     public static int[] range = new int[SIZE];
     public static int[] level = new int[SIZE];
     public static int[] cooldown = new int[SIZE];
     public static int[] cooldownMax = new int[SIZE];
-    public static int[] power = new int[SIZE];
+    public static int[] powerMin = new int[SIZE];
+    public static int[] powerMax = new int[SIZE];
     public enum Target { Self, Enemy, Ground};
     public static Target[] target = new Target[SIZE];
 
@@ -97,11 +98,9 @@ public class PlayerAttack : MonoBehaviour
             Abilities[i].GetComponentInChildren<Text>().text = null;
             Abilities[i].GetComponentInChildren<Button>().enabled = true;
             Abilities[i].GetComponentInChildren<Image>().color = Color.white;
-            if (abilitySelected == i)
-            {
-                Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
-            }
         }
+        Artifact artifact = new Artifact();
+        UI.Description.GetComponentInChildren<Text>().text = artifact.GetDescription(title[i], i);
     }
 
     public void AbilityClicked(int i)
@@ -110,7 +109,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (abilitySelected == i)
             {
-                Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.black;
+                Abilities[i].GetComponentInChildren<Outline>().enabled = false; ;
                 UI.Description.GetComponentInChildren<Text>().text = null;
                 abilitySelected = SIZE;
             }
@@ -121,10 +120,11 @@ public class PlayerAttack : MonoBehaviour
 
                 for (int j = 0; j < SIZE; j++)
                 {
-                    Abilities[j].GetComponentInChildren<Outline>().effectColor = Color.black;
+                    Abilities[j].GetComponentInChildren<Outline>().enabled = false;
                 }
-                Abilities[i].GetComponentInChildren<Outline>().effectColor = Color.HSVToRGB(180 / 360f, 0.2f, 1f);
-                UI.Description.GetComponentInChildren<Text>().text = description[i];
+                Abilities[i].GetComponentInChildren<Outline>().enabled = true;
+                Artifact artifact = new Artifact();
+                UI.Description.GetComponentInChildren<Text>().text = artifact.GetDescription(title[i], i);
             }
         }
     }

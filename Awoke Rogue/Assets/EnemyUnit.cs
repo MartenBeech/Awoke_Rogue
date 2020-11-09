@@ -10,7 +10,7 @@ public class EnemyUnit : MonoBehaviour
     public int tilePos;
 
     public string title;
-    public int health = 20;
+    public int health = 2;
     public int range = 1;
     public int damage = 4;
     public int cooldown = 1;

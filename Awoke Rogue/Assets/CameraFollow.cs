@@ -15,5 +15,21 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         transform.position = player.transform.position + offset;
+
+        if (Input.mouseScrollDelta.y > 0)
+        {
+            if (CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize > 10)
+            {
+                CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize /= 1.1f;
+            }
+        }
+
+        else if (Input.mouseScrollDelta.y < 0)
+        {
+            if (CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize < 100)
+            {
+                CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize *= 1.1f;
+            }
+        }
     }
 }

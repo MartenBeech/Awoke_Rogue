@@ -68,6 +68,7 @@ public class Level : MonoBehaviour
 
     public void WinLevel()
     {
+        CameraMain.Cam.GetComponentInChildren<Camera>().orthographicSize = 50;
         PlayerStat playerStat = new PlayerStat();
         playerStat.ResetStats();
         Shop shop = new Shop();

@@ -9,12 +9,52 @@ public class Enemy : MonoBehaviour
     public static bool enemyTurn = false;
     public static EnemyUnit[] enemies = new EnemyUnit[Tile.SIZE];
     public static bool[] occupied = new bool[Tile.SIZE];
+    public static int artifactKeepers = 0;
 
     public void SummonNormalEnemies(int amount)
     {
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
         UnitStat unitStat = new UnitStat();
-        enemyList = unitStat.GetUnitLevels(1);
+        switch(Level.level)
+        {
+            case 1:
+                enemyList = unitStat.GetUnitLevels(1, false);
+                break;
+            case 2:
+                enemyList = unitStat.GetUnitLevels(1, false);
+                break;
+            case 3:
+                enemyList = unitStat.GetUnitLevels(1, false);
+                break;
+            case 4:
+                enemyList = unitStat.GetUnitLevels(1, true);
+                break;
+            case 5:
+                enemyList = unitStat.GetUnitLevels(1, true);
+                break;
+            case 6:
+                enemyList = unitStat.GetUnitLevels(1, true);
+                break;
+            case 7:
+                enemyList = unitStat.GetUnitLevels(2, false);
+                break;
+            case 8:
+                enemyList = unitStat.GetUnitLevels(2, false);
+                break;
+            case 9:
+                enemyList = unitStat.GetUnitLevels(2, false);
+                break;
+            case 10:
+                enemyList = unitStat.GetUnitLevels(2, true);
+                break;
+            case 11:
+                enemyList = unitStat.GetUnitLevels(2, true);
+                break;
+            case 12:
+                enemyList = unitStat.GetUnitLevels(2, true);
+                break;
+        }
+        
         int keyKeeper = rng.Range(0, amount);
 
         for (int i = 0; i < amount; i++)
@@ -36,19 +76,55 @@ public class Enemy : MonoBehaviour
 
     public void SummonTreasureEnemies(int amount, List<int> tiles)
     {
+        artifactKeepers = 0;
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
         UnitStat unitStat = new UnitStat();
-        enemyList = unitStat.GetUnitLevels(2);
-        int artifactKeeper = rng.Range(0, amount);
+        switch (Level.level)
+        {
+            case 1:
+                enemyList = unitStat.GetUnitLevels(2, false);
+                break;
+            case 2:
+                enemyList = unitStat.GetUnitLevels(2, false);
+                break;
+            case 3:
+                enemyList = unitStat.GetUnitLevels(2, false);
+                break;
+            case 4:
+                enemyList = unitStat.GetUnitLevels(2, true);
+                break;
+            case 5:
+                enemyList = unitStat.GetUnitLevels(2, true);
+                break;
+            case 6:
+                enemyList = unitStat.GetUnitLevels(2, true);
+                break;
+            case 7:
+                enemyList = unitStat.GetUnitLevels(3, false);
+                break;
+            case 8:
+                enemyList = unitStat.GetUnitLevels(3, false);
+                break;
+            case 9:
+                enemyList = unitStat.GetUnitLevels(3, false);
+                break;
+            case 10:
+                enemyList = unitStat.GetUnitLevels(3, true);
+                break;
+            case 11:
+                enemyList = unitStat.GetUnitLevels(3, true);
+                break;
+            case 12:
+                enemyList = unitStat.GetUnitLevels(3, true);
+                break;
+        }
 
         for (int i = 0; i < amount; i++)
         {
             int rnd = rng.Range(0, tiles.Count);
             SummonEnemy(tiles[rnd], enemyList[rng.Range(0, enemyList.Count)]);
-            if (i == artifactKeeper)
-            {
-                enemies[tiles[rnd]].artifactKeeper = true;
-            }
+            enemies[tiles[rnd]].artifactKeeper = true;
+            artifactKeepers++;
 
             tiles.RemoveAt(rnd);
         }
@@ -58,7 +134,45 @@ public class Enemy : MonoBehaviour
     {
         List<UnitStat.Units> enemyList = new List<UnitStat.Units>();
         UnitStat unitStat = new UnitStat();
-        enemyList = unitStat.GetUnitLevels(3);
+        switch (Level.level)
+        {
+            case 1:
+                enemyList = unitStat.GetUnitLevels(3, false);
+                break;
+            case 2:
+                enemyList = unitStat.GetUnitLevels(3, false);
+                break;
+            case 3:
+                enemyList = unitStat.GetUnitLevels(3, false);
+                break;
+            case 4:
+                enemyList = unitStat.GetUnitLevels(3, true);
+                break;
+            case 5:
+                enemyList = unitStat.GetUnitLevels(3, true);
+                break;
+            case 6:
+                enemyList = unitStat.GetUnitLevels(3, true);
+                break;
+            case 7:
+                enemyList = unitStat.GetUnitLevels(4, false);
+                break;
+            case 8:
+                enemyList = unitStat.GetUnitLevels(4, false);
+                break;
+            case 9:
+                enemyList = unitStat.GetUnitLevels(4, false);
+                break;
+            case 10:
+                enemyList = unitStat.GetUnitLevels(4, true);
+                break;
+            case 11:
+                enemyList = unitStat.GetUnitLevels(4, true);
+                break;
+            case 12:
+                enemyList = unitStat.GetUnitLevels(4, true);
+                break;
+        }
 
         for (int i = 0; i < Tile.SIZE; i++)
         {
@@ -142,10 +256,14 @@ public class Enemy : MonoBehaviour
         }
         if (enemies[tile].artifactKeeper)
         {
-            Artifact artifact = new Artifact();
-            artifact.DropRandomArtifact(tile);
-            AnimaText text = new AnimaText();
-            text.ShowText(tile, "Artifact Dropped", Color.cyan);
+            artifactKeepers--;
+            if (artifactKeepers == 0)
+            {
+                Artifact artifact = new Artifact();
+                artifact.DropRandomArtifact(tile);
+                AnimaText text = new AnimaText();
+                text.ShowText(tile, "Artifact Dropped", Color.cyan);
+            }
         }
         if (enemies[tile].boss)
         {

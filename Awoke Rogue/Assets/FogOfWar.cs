@@ -449,8 +449,6 @@ public class FogOfWar : MonoBehaviour
                 Tile.Tiles[i].GetComponentInChildren<Image>().color = Color.white;
             }
         }
-        Map map = new Map();
-        //map.ScoutMap(PlayerMovement.tilePos, 5);
     }
 
     public void ScoutEnemies()

@@ -43,7 +43,46 @@ public class Level : MonoBehaviour
         
 
         DungeonGenerator dungeon = new DungeonGenerator();
-        dungeon.GenerateDungeon();
+        switch(level)
+        {
+            case 1:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 2:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 3:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 4:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 5:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 6:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 7:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 8:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 9:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 10:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 11:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+            case 12:
+                dungeon.GenerateDungeon(1, 1);
+                break;
+        }
+        
         UI.EndBtn.GetComponentInChildren<Text>().text = "End Turn";
 
         Map map = new Map();

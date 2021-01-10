@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class DungeonGenerator : MonoBehaviour
 {
     Rng rng = new Rng();
-    public void GenerateDungeon()
+    public void GenerateDungeon(int rooms, int enemies)
     {
         FillWithWalls();
 
-        AddRoomSection(1, 1);
+        AddRoomSection(rooms, 1);
 
         AddStartAndExit();
 
         Enemy enemy = new Enemy();
         enemy.SummonBoss();
-        enemy.SummonNormalEnemies(1);
+        enemy.SummonNormalEnemies(enemies);
     }
 
     private void FillWithWalls()

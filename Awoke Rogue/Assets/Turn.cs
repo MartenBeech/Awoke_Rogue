@@ -48,7 +48,7 @@ public class Turn : MonoBehaviour
         EnemyUnit enemyUnit = new EnemyUnit();
 
         //ENEMIES MOVE OR ATTACK
-        List<int> enemies = distance.GetEnemiesAroundPlayer(PlayerStat.stealthRange);
+        List<int> enemies = distance.GetEnemiesAroundPlayer(PlayerStat.scentRange);
 
         if (enemies.Count == 0)
         {
@@ -58,7 +58,7 @@ public class Turn : MonoBehaviour
         else
         {
             List<int> sortedEnemies = new List<int>();
-            for (int range = 1; range <= PlayerStat.stealthRange; range++)
+            for (int range = 1; range <= PlayerStat.scentRange; range++)
             {
                 for (int i = 0; i < enemies.Count; i++)
                 {
@@ -93,7 +93,7 @@ public class Turn : MonoBehaviour
 
         //ENEMIES PREPARE
         enemies.Clear();
-        enemies = distance.GetEnemiesAroundPlayer(PlayerStat.stealthRange);
+        enemies = distance.GetEnemiesAroundPlayer(PlayerStat.scentRange);
 
         if (enemies.Count == 0)
         {

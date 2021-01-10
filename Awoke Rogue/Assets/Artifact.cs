@@ -53,6 +53,7 @@ public class Artifact : MonoBehaviour
         prefab = Instantiate(prefab, Tile.Tiles[tile].transform.position, new Quaternion(0, 0, 0, 0), parent.transform);
         prefab.name = title.ToString() + tile;
         prefab.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Artifacts/" + title.ToString());
+        prefab.GetComponentInChildren<RectTransform>().sizeDelta = new Vector2(50, 50);
 
         switch (title)
         {

@@ -45,45 +45,93 @@ public class UnitStat : MonoBehaviour
     public enum Units
     {
         DireWolf, Sentinel, Cavalier, Guardian, Chaplain, Landsknecht, Seraph,
+        Silverback, Legionnaire, Cuirassier, Justicar, Abbot, Swordmaster, Celestial,
         Gargoyle, Golem, Djinn, Rakshasa, Apprentice, ArcaneEagle, Colossus,
-        Ghost, EbonSpider, Vampire, Lich, Lamasu, GrimRider, BoneDragon
+        ObsidianGargoyle, SandstoneGolem, DjinnChanneler, RakshasaRaja, Disciple, Simurgh, Titan,
+        Ghost, EbonSpider, Vampire, Lich, Lamasu, GrimRider, BoneDragon,
+        Banshee, DeathSpider, VampireKnight, Archlich, PlagueLamasu, GrimReaper, SpectralDragon
     };
 
-    public List<Units> GetUnitLevels(int level)
+    public List<Units> GetUnitLevels(int unitLevel, bool upgraded)
     {
         List<Units> units = new List<Units>();
-        if (level == 1)
+        if (unitLevel == 1)
         {
-            units.Add(Units.DireWolf);
-            units.Add(Units.Sentinel);
-            units.Add(Units.Gargoyle);
-            units.Add(Units.Golem);
-            units.Add(Units.Ghost);
-            units.Add(Units.EbonSpider);
+            if (!upgraded)
+            {
+                units.Add(Units.DireWolf);
+                units.Add(Units.Sentinel);
+                units.Add(Units.Gargoyle);
+                units.Add(Units.Golem);
+                units.Add(Units.Ghost);
+                units.Add(Units.EbonSpider);
+            }
+            else
+            {
+                units.Add(Units.Silverback);
+                units.Add(Units.Legionnaire);
+                units.Add(Units.ObsidianGargoyle);
+                units.Add(Units.SandstoneGolem);
+                units.Add(Units.Banshee);
+                units.Add(Units.DeathSpider);
+            }
         }
-        else if (level == 2)
+        else if (unitLevel == 2)
         {
-            units.Add(Units.Cavalier);
-            units.Add(Units.Guardian);
-            units.Add(Units.Djinn);
-            units.Add(Units.Rakshasa);
-            units.Add(Units.Vampire);
-            units.Add(Units.Lich);
+            if (!upgraded)
+            {
+                units.Add(Units.Cavalier);
+                units.Add(Units.Guardian);
+                units.Add(Units.Djinn);
+                units.Add(Units.Rakshasa);
+                units.Add(Units.Vampire);
+                units.Add(Units.Lich);
+            }
+            else
+            {
+                units.Add(Units.Cuirassier);
+                units.Add(Units.Justicar);
+                units.Add(Units.DjinnChanneler);
+                units.Add(Units.RakshasaRaja);
+                units.Add(Units.VampireKnight);
+                units.Add(Units.Archlich);
+            }
         }
-        else if (level == 3)
+        else if (unitLevel == 3)
         {
-            units.Add(Units.Chaplain);
-            units.Add(Units.Landsknecht);
-            units.Add(Units.Apprentice);
-            units.Add(Units.ArcaneEagle);
-            units.Add(Units.Lamasu);
-            units.Add(Units.GrimRider);
+            if (!upgraded)
+            {
+                units.Add(Units.Chaplain);
+                units.Add(Units.Landsknecht);
+                units.Add(Units.Apprentice);
+                units.Add(Units.ArcaneEagle);
+                units.Add(Units.Lamasu);
+                units.Add(Units.GrimRider);
+            }
+            else
+            {
+                units.Add(Units.Abbot);
+                units.Add(Units.Swordmaster);
+                units.Add(Units.Disciple);
+                units.Add(Units.Simurgh);
+                units.Add(Units.PlagueLamasu);
+                units.Add(Units.GrimReaper);
+            }
         }
-        else if (level == 4)
+        else if (unitLevel == 4)
         {
-            units.Add(Units.Seraph);
-            units.Add(Units.Colossus);
-            units.Add(Units.BoneDragon);
+            if (!upgraded)
+            {
+                units.Add(Units.Seraph);
+                units.Add(Units.Colossus);
+                units.Add(Units.BoneDragon);
+            }
+            else
+            {
+                units.Add(Units.Celestial);
+                units.Add(Units.Titan);
+                units.Add(Units.SpectralDragon);
+            }
         }
 
         return units;

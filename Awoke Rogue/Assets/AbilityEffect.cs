@@ -13,38 +13,28 @@ public class AbilityEffect : MonoBehaviour
         switch (PlayerAttack.title[i])
         {
             case Artifact.Title.Crossbow:
-                if (stat.ConsumeRage())
-                {
-                    attack.DamageEnemy(PlayerAttack.powerMax[i] * 2, tile);
-                }
-                else
-                {
-                    attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i], PlayerAttack.powerMax[i]), tile);
-                    stat.GainRage(rng.Range(10, 21));
-                }
+                attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i], PlayerAttack.powerMax[i]), tile);
+                stat.GainRage(rng.Range(4, 11));
                 break;
 
             case Artifact.Title.BoneSword:
-                if (stat.ConsumeRage())
-                {
-                    attack.DamageEnemy(PlayerAttack.powerMax[i] * 2, tile);
-                }
-                else
-                {
-                    attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i], PlayerAttack.powerMax[i]), tile);
-                    stat.GainRage(rng.Range(10, 21));
-                }
+                attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i], PlayerAttack.powerMax[i]), tile);
+                stat.GainRage(rng.Range(6, 15));
                 break;
 
             case Artifact.Title.Fireball:
+                attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i], PlayerAttack.powerMax[i]), tile);
+                stat.GainRage(rng.Range(4, 11));
+                break;
+
+            case Artifact.Title.HeavyCannon:
                 if (stat.ConsumeRage())
                 {
-                    attack.DamageEnemy(PlayerAttack.powerMax[i] * 2, tile);
+                    attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i] * 2, PlayerAttack.powerMax[i] * 2), tile);
                 }
                 else
                 {
                     attack.DamageEnemy(rng.Range(PlayerAttack.powerMin[i], PlayerAttack.powerMax[i]), tile);
-                    stat.GainRage(rng.Range(10, 21));
                 }
                 break;
         }
@@ -114,37 +104,8 @@ public class AbilityEffect : MonoBehaviour
             PlayerAttack.occupied[i] = true;
             PlayerAttack.description[i] = artifact.GetDescription(title, i);
 
-
-            switch (title)
-            {
-                case Artifact.Title.Crossbow:
-                    PlayerAttack.range[i] = 4;
-                    PlayerAttack.level[i] = 1;
-                    PlayerAttack.cooldown[i] = 0;
-                    PlayerAttack.powerMin[i] = 2;
-                    PlayerAttack.powerMax[i] = 6;
-                    PlayerAttack.target[i] = PlayerAttack.Target.Enemy;
-                    break;
-
-                case Artifact.Title.BoneSword:
-                    PlayerAttack.range[i] = 4;
-                    PlayerAttack.level[i] = 1;
-                    PlayerAttack.cooldown[i] = 0;
-                    PlayerAttack.powerMin[i] = 2;
-                    PlayerAttack.powerMax[i] = 6;
-                    PlayerAttack.target[i] = PlayerAttack.Target.Enemy;
-                    break;
-
-                case Artifact.Title.Fireball:
-                    PlayerAttack.range[i] = 4;
-                    PlayerAttack.level[i] = 1;
-                    PlayerAttack.cooldown[i] = 0;
-                    PlayerAttack.powerMin[i] = 2;
-                    PlayerAttack.powerMax[i] = 6;
-                    PlayerAttack.target[i] = PlayerAttack.Target.Enemy;
-                    break;
-            }
-            PlayerAttack.cooldownMax[i] = PlayerAttack.cooldown[i];
+            AbilityStat abilityStat = new AbilityStat();
+            abilityStat.UpdateStat(title, i);
 
             PlayerAttack attack = new PlayerAttack();
             attack.DisplayAbility(i);

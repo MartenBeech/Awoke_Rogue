@@ -17,6 +17,7 @@ public class PlayerAttack : MonoBehaviour
     public static int[] cooldownMax = new int[SIZE];
     public static int[] powerMin = new int[SIZE];
     public static int[] powerMax = new int[SIZE];
+    public static int[] powerSpecial = new int[SIZE];
     public enum Target { Self, Enemy, Ground};
     public static Target[] target = new Target[SIZE];
 
@@ -99,13 +100,11 @@ public class PlayerAttack : MonoBehaviour
             Abilities[i].GetComponentInChildren<Button>().enabled = true;
             Abilities[i].GetComponentInChildren<Image>().color = Color.white;
         }
-        Artifact artifact = new Artifact();
-        UI.Description.GetComponentInChildren<Text>().text = artifact.GetDescription(title[i], i);
     }
 
     public void AbilityClicked(int i)
     {
-        if (Abilities[i].GetComponentInChildren<Button>().enabled)
+        //if (Abilities[i].GetComponentInChildren<Button>().enabled)
         {
             if (abilitySelected == i)
             {

@@ -11,4 +11,6 @@ public class Shop : MonoBehaviour
         CameraMain.Cam.transform.position = new Vector3(CameraMain.Shop.transform.position.x, CameraMain.Shop.transform.position.y, -10);
         UI.EndBtn.GetComponentInChildren<Text>().text = "Enter Next Dungeon";
     }
+
+    //Don't add more code to this file
 }

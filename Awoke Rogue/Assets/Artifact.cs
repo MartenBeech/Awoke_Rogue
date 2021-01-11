@@ -9,7 +9,8 @@ public class Artifact : MonoBehaviour
     public enum Title
     {
         None,
-        Crossbow, BoneSword, Fireball
+        Crossbow, BoneSword, Fireball,
+        HeavyCannon, ExplosiveShot
     };
     public static Title[] titles = new Title[Tile.SIZE];
 
@@ -20,14 +21,11 @@ public class Artifact : MonoBehaviour
 
     public void DropRandomArtifact(int tile)
     {
-        int rnd = rng.Range(0, 3);
-        if (rnd == 0)
-            SummonArtifact(tile, Title.Crossbow);
-        else if (rnd == 1)
-            SummonArtifact(tile, Title.BoneSword);
-        else if (rnd == 2)
-            SummonArtifact(tile, Title.Fireball);
+        List<Title> artifact = new List<Title>();
+        artifact.Add(Title.ExplosiveShot);
+        artifact.Add(Title.HeavyCannon);
 
+        SummonArtifact(tile, artifact[rng.Range(0, artifact.Count)]);
     }
 
     public void DropHelmet(int tile)
@@ -75,16 +73,28 @@ public class Artifact : MonoBehaviour
             }
         }
 
+        string description = "<b>" + _title + "</b>" + "\n";
+
         switch (title)
         {
             case Title.Crossbow:
-                return _title + "\n" + "Shoot an arrow at an enemy\nPower: " + PlayerAttack.powerMin[i] + "-" + PlayerAttack.powerMax[i] + " damage\nRange: " + PlayerAttack.range[i];
+                description += "Shoot an arrow at an enemy\n";
+                break;
             case Title.BoneSword:
-                return _title + "\n" + "Slash down an enemy\nPower: " + PlayerAttack.powerMin[i] + "-" + PlayerAttack.powerMax[i] + " damage\nRange: " + PlayerAttack.range[i];
+                description += "Slash down an enemy\n";
+                break;
             case Title.Fireball:
-                return _title + "\n" + "Fire a ball at an enemy\nPower: " + PlayerAttack.powerMin[i] + "-" + PlayerAttack.powerMax[i] + " damage\nRange: " + PlayerAttack.range[i];
+                description += "Fire a ball at an enemy\n";
+                break;
+            case Title.HeavyCannon:
+                description += "Fire a cannon ball to push the enemy " + PlayerAttack.powerSpecial[i] + " tiles back\n";
+                break;
+            case Title.ExplosiveShot:
+                description += "Explode around an enemy, dealing double damage to enemies in a " + PlayerAttack.powerSpecial[i] + "x" + PlayerAttack.powerSpecial[i] + " area\n";
+                break;
         }
-        return "";
+        description += "Power: " + PlayerAttack.powerMin[i] + "-" + PlayerAttack.powerMax[i] + " damage\nRange: " + PlayerAttack.range[i];
+        return description;
     }
 
     public Type GetArtifactType(Title title)
@@ -95,6 +105,10 @@ public class Artifact : MonoBehaviour
             case Title.BoneSword:
             case Title.Fireball:
                 return Type.AbilityWeak;
+
+            case Title.HeavyCannon:
+            case Title.ExplosiveShot:
+                return Type.AbilityStrong;
         }
         return Type.None;
     }
